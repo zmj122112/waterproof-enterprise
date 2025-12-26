@@ -1,0 +1,305 @@
+@use './theme.scss' as *;
+
+// Element Plus 主题变量覆盖 - 国企防水服务平台风格
+:root {
+  /* 主色调 - 深海蓝/科技蓝 */
+  --el-color-primary: #1a56db;
+  --el-color-primary-light-1: #316dcf;
+  --el-color-primary-light-2: #4782d4;
+  --el-color-primary-light-3: #5c97d9;
+  --el-color-primary-light-4: #72acde;
+  --el-color-primary-light-5: #87c1e3;
+  --el-color-primary-light-6: #9dc6e8;
+  --el-color-primary-light-7: #b3dbe3;
+  --el-color-primary-light-8: #c8e0e8;
+  --el-color-primary-light-9: #dde5ed;
+  --el-color-primary-dark-2: #0c3c9c;
+  
+  /* 辅助色 - 金橙色 */
+  --el-color-success: #00b42a;
+  --el-color-warning: #ff9500;
+  --el-color-danger: #f53f3f;
+  --el-color-info: #1a56db;
+  
+  /* 文本色 */
+  --el-text-color-primary: #1f2937;
+  --el-text-color-regular: #4b5563;
+  --el-text-color-secondary: #9ca3af;
+  --el-text-color-placeholder: #d1d5db;
+  
+  /* 背景色 */
+  --el-bg-color: #ffffff;
+  --el-bg-color-page: #f9fafb;
+  --el-bg-color-overlay: #ffffff;
+  
+  /* 边框色 */
+  --el-border-color: #e5e7eb;
+  --el-border-color-light: #f3f4f6;
+  --el-border-color-lighter: #f9fafb;
+  --el-border-color-extra-light: #ffffff;
+  
+  /* 阴影 */
+  --el-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --el-box-shadow-light: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --el-box-shadow-lighter: 0 8px 16px rgba(0, 0, 0, 0.12);
+  
+  /* 圆角 */
+  --el-border-radius-base: 8px;
+  --el-border-radius-small: 4px;
+  --el-border-radius-round: 24px;
+  --el-border-radius-circle: 50%;
+  
+  /* 字体 */
+  --el-font-family: 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
+  --el-font-size-extra-large: 20px;
+  --el-font-size-large: 18px;
+  --el-font-size-medium: 16px;
+  --el-font-size-base: 14px;
+  --el-font-size-small: 13px;
+  --el-font-size-extra-small: 12px;
+  
+  /* 按钮 */
+  --el-button-text-color: #1f2937;
+  --el-button-bg-color: #f9fafb;
+  --el-button-border-color: #e5e7eb;
+  
+  /* 卡片 */
+  --el-card-bg-color: #ffffff;
+  --el-card-border-color: #e5e7eb;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  font-family: $font-family;
+  font-size: $font-size-md;
+  line-height: $line-height-md;
+  color: $text-primary;
+  background-color: $bg-secondary;
+  height: 100%;
+}
+
+#app {
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+}
+
+// 基础样式重置
+a {
+  color: $primary-color;
+  text-decoration: none;
+  transition: color $transition-fast;
+  
+  &:hover {
+    color: $primary-hover-color;
+  }
+  
+  &:active {
+    color: $primary-active-color;
+  }
+}
+
+// 滚动条样式
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: $bg-secondary;
+  border-radius: $border-radius-sm;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $border-color;
+  border-radius: $border-radius-sm;
+  
+  &:hover {
+    background: $border-hover-color;
+  }
+}
+
+// 卡片样式
+.card {
+  background: $bg-primary;
+  border-radius: $border-radius-md;
+  box-shadow: $shadow-sm;
+  padding: $spacing-md;
+  transition: all $transition-normal;
+  
+  &:hover {
+    box-shadow: $shadow-md;
+    transform: translateY(-2px);
+  }
+}
+
+// 按钮基础样式
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  border-radius: $border-radius-sm;
+  font-size: $font-size-sm;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all $transition-fast;
+  border: none;
+  outline: none;
+  
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+  
+  // 主按钮
+  &-primary {
+    background-color: $primary-color;
+    color: white;
+    
+    &:hover:not(:disabled) {
+      background-color: $primary-hover-color;
+      box-shadow: $shadow-sm;
+    }
+    
+    &:active:not(:disabled) {
+      background-color: $primary-active-color;
+    }
+  }
+  
+  // 次要按钮
+  &-secondary {
+    background-color: $bg-secondary;
+    color: $text-primary;
+    border: 1px solid $border-color;
+    
+    &:hover:not(:disabled) {
+      background-color: $bg-hover;
+      border-color: $border-hover-color;
+    }
+    
+    &:active:not(:disabled) {
+      background-color: $bg-tertiary;
+    }
+  }
+  
+  // 文本按钮
+  &-text {
+    background-color: transparent;
+    color: $primary-color;
+    
+    &:hover:not(:disabled) {
+      background-color: $bg-hover;
+    }
+    
+    &:active:not(:disabled) {
+      background-color: $bg-tertiary;
+    }
+  }
+}
+
+// 容器样式
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 $spacing-md;
+}
+
+// 页面标题
+.page-title {
+  font-size: $font-size-xl;
+  font-weight: 600;
+  color: $text-primary;
+  margin-bottom: $spacing-lg;
+}
+
+// 表单样式
+.form-item {
+  margin-bottom: $spacing-md;
+  
+  .form-label {
+    display: block;
+    font-size: $font-size-sm;
+    font-weight: 500;
+    color: $text-primary;
+    margin-bottom: $spacing-xs;
+  }
+  
+  .form-control {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid $border-color;
+    border-radius: $border-radius-sm;
+    font-size: $font-size-sm;
+    color: $text-primary;
+    transition: all $transition-fast;
+    
+    &:focus {
+      outline: none;
+      border-color: $primary-color;
+      box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+    }
+    
+    &:hover:not(:focus):not(:disabled) {
+      border-color: $border-hover-color;
+    }
+    
+    &:disabled {
+      background-color: $bg-secondary;
+      color: $text-disabled;
+      cursor: not-allowed;
+    }
+  }
+  
+  .form-helper-text {
+    font-size: $font-size-xs;
+    color: $text-tertiary;
+    margin-top: $spacing-xs;
+  }
+}
+
+// 动画效果
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity $transition-normal;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.slide-enter-active,
+.slide-leave-active {
+  transition: all $transition-normal;
+}
+
+.slide-enter-from {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+
+.slide-leave-to {
+  transform: translateX(100%);
+  opacity: 0;
+}
+
+// 加载状态
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  
+  .loading-text {
+    margin-left: $spacing-sm;
+    color: $text-secondary;
+    font-size: $font-size-sm;
+  }
+}

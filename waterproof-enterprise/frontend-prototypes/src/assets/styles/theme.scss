@@ -1,0 +1,96 @@
+// 国企背景防水服务平台配色方案
+
+// 主色调 - 深海蓝/科技蓝
+$primary-color: #1a56db;
+$primary-hover-color: #2563eb;
+$primary-active-color: #1e40af;
+
+// 辅助色 - 金橙色
+$secondary-color: #ff9500;
+$secondary-hover-color: #ffac33;
+$secondary-active-color: #cc7700;
+
+// 成功色 - 绿色
+$success-color: #00b42a;
+$success-hover-color: #36cf82;
+$success-active-color: #00873d;
+
+// 警告色 - 金橙色
+$warning-color: #ff9500;
+$warning-hover-color: #ffac33;
+$warning-active-color: #cc7700;
+
+// 错误色 - 红色
+$error-color: #f53f3f;
+$error-hover-color: #ff7875;
+$error-active-color: #c41d1d;
+
+// 文本色 - 设计规范中的灰度层次
+$text-primary: #1f2937;
+$text-secondary: #4b5563;
+$text-tertiary: #9ca3af;
+$text-disabled: #d1d5db;
+
+// 背景色
+$bg-primary: #ffffff;
+$bg-secondary: #f9fafb;
+$bg-tertiary: #f3f4f6;
+$bg-hover: #e5e7eb;
+
+// 边框色
+$border-color: #e5e7eb;
+$border-hover-color: #d1d5db;
+$border-active-color: #9ca3af;
+
+// 阴影
+$shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+$shadow-md: 0 4px 8px rgba(0, 0, 0, 0.12);
+$shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.15);
+
+// 圆角
+$border-radius-sm: 4px;
+$border-radius-md: 8px;
+$border-radius-lg: 12px;
+
+// 字体 - 月星VI规范
+$font-family: 'Noto Sans SC', 'Myriad Pro', 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
+$font-size-xs: 12px;
+$font-size-sm: 14px;
+$font-size-md: 16px;
+$font-size-lg: 18px;
+$font-size-xl: 24px;
+$font-size-xxl: 32px;
+
+// 字重
+$font-weight-light: 300;
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+// 行高
+$line-height-xs: 1.3;
+$line-height-sm: 1.4;
+$line-height-md: 1.6;
+$line-height-lg: 1.8;
+$line-height-xl: 2;
+
+// 间距
+$spacing-xs: 4px;
+$spacing-sm: 8px;
+$spacing-md: 16px;
+$spacing-lg: 24px;
+$spacing-xl: 32px;
+$spacing-xxl: 48px;
+
+// 动画
+$transition-fast: 0.2s ease;
+$transition-normal: 0.3s ease;
+$transition-slow: 0.5s ease;
+
+// 断点
+$breakpoint-xs: 480px;
+$breakpoint-sm: 768px;
+$breakpoint-md: 992px;
+$breakpoint-lg: 1200px;
+$breakpoint-xl: 1600px;

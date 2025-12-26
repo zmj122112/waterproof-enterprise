@@ -205,7 +205,7 @@ const formatDateTime = (dateTime) => {
           <el-table-column prop="status" label="状态" width="120">
             <template #default="scope">
               <el-tag
-                :type="scope.row.status === '已完成' ? 'success' : (scope.row.status === '待审核' ? 'warning' : 'danger')"
+                type="primary"
                 size="large"
               >
                 {{ scope.row.status }}

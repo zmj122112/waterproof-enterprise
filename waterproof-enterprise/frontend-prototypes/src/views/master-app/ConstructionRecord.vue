@@ -90,7 +90,7 @@ const viewConstructionRecord = (record) => {
           </div>
           <div style="display: flex; flex-wrap: wrap;">
             <span style="width: 80px; font-weight: 500; color: #111827; margin-right: 16px;">施工照片：</span>
-            <el-tag type="info" size="small">{{ record.photos }}张</el-tag>
+            <el-tag type="primary" size="small">{{ record.photos }}张</el-tag>
           </div>
         </div>
         

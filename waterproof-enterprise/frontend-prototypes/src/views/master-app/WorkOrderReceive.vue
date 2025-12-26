@@ -189,7 +189,7 @@ const contactCustomer = (workOrder) => {
                   导航前往
                 </el-button>
                 <el-button 
-                  type="success" 
+                  type="primary" 
                   round 
                   size="small" 
                   @click="contactCustomer(workOrder)"
@@ -198,7 +198,7 @@ const contactCustomer = (workOrder) => {
                   联系客户
                 </el-button>
                 <el-button 
-                  type="info" 
+                  type="primary" 
                   round 
                   size="small" 
                   @click="viewWorkOrderDetail(workOrder)"
@@ -237,7 +237,7 @@ const contactCustomer = (workOrder) => {
               </div>
               <div style="display: flex; justify-content: flex-end;">
                 <el-button 
-                  type="info" 
+                  type="primary" 
                   round 
                   size="small" 
                   @click="viewWorkOrderDetail(workOrder)"
@@ -304,7 +304,7 @@ const contactCustomer = (workOrder) => {
             <el-icon><Location /></el-icon>
             导航前往
           </el-button>
-          <el-button type="success" @click="contactCustomer(currentDetail)" style="flex: 1;">
+          <el-button type="primary" @click="contactCustomer(currentDetail)" style="flex: 1;">
             <el-icon><Phone /></el-icon>
             联系客户
           </el-button>

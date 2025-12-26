@@ -68,7 +68,7 @@ const viewDetail = (confirmation) => {
       >
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid #f0f0f0;">
           <div style="font-size: 14px; font-weight: 600; color: #111827;">确认编号：{{ confirmation.id }}</div>
-          <el-tag :type="confirmation.status === '已确认' ? 'success' : 'warning'" size="small" style="font-size: 12px; padding: 4px 12px;">
+          <el-tag :type="confirmation.status === '已确认' ? 'primary' : 'primary'" size="small" style="font-size: 12px; padding: 4px 12px;">
             {{ confirmation.status }}
           </el-tag>
         </div>
@@ -100,7 +100,7 @@ const viewDetail = (confirmation) => {
           </el-button>
           <el-button
             v-if="confirmation.status === '待确认'"
-            type="success"
+            type="primary"
             round
             size="small"
             block

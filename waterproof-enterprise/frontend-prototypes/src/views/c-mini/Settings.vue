@@ -2,7 +2,7 @@
 // 设置页面
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { ArrowLeft, Setting, User, Document, Shield, Bell, Help } from '@element-plus/icons-vue'
+import { ArrowLeft, Setting, User, Document, Lock, Bell, Help } from '@element-plus/icons-vue'
 
 const router = useRouter()
 
@@ -19,8 +19,8 @@ const settings = [
     category: '账号设置',
     items: [
       { name: '个人信息', icon: User, path: '/c-mini/user-profile' },
-      { name: '修改密码', icon: Shield, path: '/c-mini/change-password' },
-      { name: '绑定手机', icon: Shield, path: '/c-mini/bind-phone' }
+      { name: '修改密码', icon: Lock, path: '/c-mini/change-password' },
+      { name: '绑定手机', icon: Lock, path: '/c-mini/bind-phone' }
     ]
   },
   {
@@ -35,7 +35,7 @@ const settings = [
     items: [
       { name: '帮助中心', icon: Help, path: '/c-mini/help-center' },
       { name: '关于月星', icon: Document, path: '/c-mini/about-us' },
-      { name: '隐私政策', icon: Shield, path: '/c-mini/privacy-policy' },
+      { name: '隐私政策', icon: Lock, path: '/c-mini/privacy-policy' },
       { name: '用户协议', icon: Document, path: '/c-mini/user-agreement' }
     ]
   }

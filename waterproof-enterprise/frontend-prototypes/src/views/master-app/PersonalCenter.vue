@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { User, Setting, Document, Shield, Bell, Help } from '@element-plus/icons-vue'
+import { User, Setting, Document, Lock, Bell, Help } from '@element-plus/icons-vue'
 
 const router = useRouter()
 
@@ -21,8 +21,8 @@ const settings = [
     category: '账号设置',
     items: [
       { name: '个人信息', icon: User, path: '/master-app/profile' },
-      { name: '修改密码', icon: Shield, path: '/master-app/change-password' },
-      { name: '绑定手机', icon: Shield, path: '/master-app/bind-phone' }
+      { name: '修改密码', icon: Lock, path: '/master-app/change-password' },
+      { name: '绑定手机', icon: Lock, path: '/master-app/bind-phone' }
     ]
   },
   {
@@ -46,7 +46,7 @@ const settings = [
     items: [
       { name: '帮助中心', icon: Help, path: '/master-app/help-center' },
       { name: '关于月星', icon: Document, path: '/master-app/about-us' },
-      { name: '隐私政策', icon: Shield, path: '/master-app/privacy-policy' },
+      { name: '隐私政策', icon: Lock, path: '/master-app/privacy-policy' },
       { name: '用户协议', icon: Document, path: '/master-app/user-agreement' }
     ]
   }

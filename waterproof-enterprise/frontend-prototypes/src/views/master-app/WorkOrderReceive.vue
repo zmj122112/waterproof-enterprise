@@ -87,7 +87,7 @@ const contactCustomer = (workOrder) => {
 <template>
   <div class="work-order-receive-page" style="min-height: 100vh; background-color: #f5f7fa; padding-bottom: 100px;">
     <!-- 红色顶部区域 -->
-    <div class="header-section" style="background-color: #E60012; border-bottom-left-radius: 32px; border-bottom-right-radius: 32px; padding-top: 40px; padding-bottom: 30px; position: relative; z-index: 0;">
+    <div class="header-section" style="background-color: #CC0010; border-bottom-left-radius: 32px; border-bottom-right-radius: 32px; padding-top: 40px; padding-bottom: 30px; position: relative; z-index: 0;">
       <div class="header-content" style="padding: 0 20px;">
         <div class="brand-info" style="display: flex; align-items: center; margin-bottom: 16px;">
           <img src="/logo.png" class="logo-img" style="width: 40px; height: 40px; border-radius: 50%; background-color: white; padding: 2px; margin-right: 10px; object-fit: contain;" />

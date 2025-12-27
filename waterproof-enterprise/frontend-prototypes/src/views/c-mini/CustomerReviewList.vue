@@ -99,7 +99,7 @@ onMounted(() => {
 <template>
   <div class="customer-review-list-page" style="min-height: 100vh; background-color: #f5f7fa; padding-bottom: 100px;">
     <!-- 页面标题栏 -->
-    <div style="background-color: #E60012; border-bottom-left-radius: 32px; border-bottom-right-radius: 32px; padding: 20px 20px 30px; text-align: center; position: relative;">
+    <div style="background-color: #CC0010; border-bottom-left-radius: 32px; border-bottom-right-radius: 32px; padding: 20px 20px 30px; text-align: center; position: relative;">
       <a href="/c-mini/home" style="position: absolute; left: 10px; top: 10px; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px; cursor: pointer; z-index: 99999; background: rgba(255,255,255,0.1); border-radius: 50%; text-decoration: none;">
         <el-icon><ArrowLeft /></el-icon>
       </a>
@@ -119,7 +119,7 @@ onMounted(() => {
         >
         <button 
           @click="searchReviews" 
-          style="background: #E60012; color: white; border: none; padding: 6px 16px; border-radius: 12px; font-size: 14px; font-weight: 500; cursor: pointer;"
+          style="background: #CC0010; color: white; border: none; padding: 6px 16px; border-radius: 12px; font-size: 14px; font-weight: 500; cursor: pointer;"
         >
           搜索
         </button>
@@ -131,7 +131,7 @@ onMounted(() => {
       <div style="background: white; border: 1px solid #E5E7EB; border-radius: 20px; padding: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
         <div style="display: flex; align-items: center; gap: 16px;">
           <div>
-            <div style="font-size: 32px; font-weight: bold; color: #E60012;">4.9</div>
+            <div style="font-size: 32px; font-weight: bold; color: #CC0010;">4.9</div>
             <div style="display: flex; align-items: center; gap: 4px; margin-top: 4px;">
               <el-rate :model-value="5" disabled size="small" show-score score-template="{value}" />
             </div>
@@ -142,7 +142,7 @@ onMounted(() => {
               <div style="font-size: 14px; color: #111827;">80%</div>
             </div>
             <div style="height: 8px; background: #f3f4f6; border-radius: 4px; overflow: hidden;">
-              <div style="height: 100%; width: 80%; background: #E60012; border-radius: 4px;"></div>
+              <div style="height: 100%; width: 80%; background: #CC0010; border-radius: 4px;"></div>
             </div>
             <div style="display: flex; align-items: center; justify-content: space-between; margin: 6px 0;">
               <div style="font-size: 14px; color: #6b7280;">4星</div>
@@ -180,7 +180,7 @@ onMounted(() => {
           <!-- 评价头部 -->
           <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
             <div style="display: flex; align-items: center; gap: 12px;">
-              <div style="width: 40px; height: 40px; background: #E60012; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 18px; font-weight: bold;">{{ review.avatar }}</div>
+              <div style="width: 40px; height: 40px; background: #CC0010; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 18px; font-weight: bold;">{{ review.avatar }}</div>
               <div>
                 <div style="font-weight: bold; font-size: 14px;">{{ review.name }}</div>
                 <div style="font-size: 12px; color: #6b7280;">{{ review.project }} | {{ review.date }}</div>
@@ -191,7 +191,7 @@ onMounted(() => {
           
           <!-- 评价标签 -->
           <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px;">
-            <div v-for="(tag, index) in review.tags" :key="index" style="background: #FFF0F0; color: #E60012; font-size: 12px; padding: 2px 8px; border-radius: 12px;">{{ tag }}</div>
+            <div v-for="(tag, index) in review.tags" :key="index" style="background: #FFF0F0; color: #CC0010; font-size: 12px; padding: 2px 8px; border-radius: 12px;">{{ tag }}</div>
           </div>
           
           <!-- 评价内容 -->

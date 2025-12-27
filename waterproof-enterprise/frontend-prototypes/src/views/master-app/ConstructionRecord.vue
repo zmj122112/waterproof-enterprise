@@ -1,7 +1,10 @@
 <script setup>
-import { ref } from 'vue'
-import { ElMessage } from 'element-plus'
+import { ref, reactive } from 'vue'
+import { useRouter } from 'vue-router'
+import { ElMessage, ElMessageBox } from 'element-plus'
 import { Plus } from '@element-plus/icons-vue'
+
+const router = useRouter()
 
 // 施工记录列表数据
 const constructionRecords = ref([
@@ -23,24 +26,115 @@ const constructionRecords = ref([
   }
 ])
 
+// 模拟工单数据
+const workOrders = ref([
+  { id: 'WD20231015001', name: '卫生间防水施工' },
+  { id: 'WD20231014001', name: '厨房防水检测' },
+  { id: 'WD20231013001', name: '阳台防水维修' }
+])
+
+// 新增施工记录弹窗状态
+const dialogVisible = ref(false)
+
+// 表单数据
+const form = reactive({
+  workOrderId: '',
+  date: new Date(),
+  content: '',
+  photos: []
+})
+
+// 表单验证规则
+const rules = {
+  workOrderId: [
+    { required: true, message: '请选择关联工单', trigger: 'change' }
+  ],
+  date: [
+    { required: true, message: '请选择施工日期', trigger: 'change' }
+  ],
+  content: [
+    { required: true, message: '请输入施工内容', trigger: 'blur' },
+    { min: 5, message: '施工内容不能少于5个字符', trigger: 'blur' }
+  ]
+}
+
+// 表单引用
+const formRef = ref(null)
+
 // 新增施工记录
 const addConstructionRecord = () => {
-  ElMessage.info('新增施工记录功能')
-  console.log('新增施工记录')
+  dialogVisible.value = true
 }
 
 // 查看施工记录详情
 const viewConstructionRecord = (record) => {
-  ElMessage.info(`查看施工记录：${record.id}`)
-  console.log('查看施工记录:', record)
+  router.push(`/master-app/construction-record/${record.id}`)
+}
+
+// 表单提交
+const submitForm = async () => {
+  if (!formRef.value) return
+  
+  try {
+    await formRef.value.validate()
+    // 模拟提交数据
+    const newRecord = {
+      id: `CR${new Date().getTime()}`,
+      workOrderId: form.workOrderId,
+      date: form.date.toISOString().split('T')[0],
+      content: form.content,
+      status: '已提交',
+      photos: form.photos.length
+    }
+    
+    // 添加到列表
+    constructionRecords.value.unshift(newRecord)
+    
+    // 关闭弹窗并重置表单
+    dialogVisible.value = false
+    resetForm()
+    
+    ElMessage.success('新增施工记录成功')
+  } catch (error) {
+    console.error('表单验证失败:', error)
+  }
+}
+
+// 重置表单
+const resetForm = () => {
+  if (!formRef.value) return
+  formRef.value.resetFields()
+  form.photos = []
+}
+
+// 关闭弹窗
+const closeDialog = () => {
+  dialogVisible.value = false
+  resetForm()
+}
+
+// 处理照片上传
+const handlePhotoUpload = (file) => {
+  // 这里只是模拟上传，实际项目中应该调用真实的上传接口
+  const reader = new FileReader()
+  reader.readAsDataURL(file.raw)
+  reader.onload = (e) => {
+    form.photos.push(e.target.result)
+  }
+  return false // 阻止默认上传行为
+}
+
+// 删除照片
+const removePhoto = (index) => {
+  form.photos.splice(index, 1)
 }
 </script>
 
 <template>
   <div class="construction-record-page" style="min-height: 100vh; background-color: #f5f7fa; padding-bottom: 100px;">
     <!-- 红色顶部区域 -->
-    <div style="background-color: #E60012; border-bottom-left-radius: 32px; border-bottom-right-radius: 32px; padding-top: 40px; padding-bottom: 30px; position: relative; z-index: 0;">
-      <div style="padding: 0 20px;">
+    <div class="header-section" style="background-color: #CC0010; border-bottom-left-radius: 32px; border-bottom-right-radius: 32px; padding-top: 40px; padding-bottom: 30px; position: relative; z-index: 0;">
+      <div class="header-content" style="padding: 0 20px;">
         <div class="brand-info" style="display: flex; align-items: center; margin-bottom: 16px;">
           <img src="/logo.png" class="logo-img" style="width: 40px; height: 40px; border-radius: 50%; background-color: white; padding: 2px; margin-right: 10px; object-fit: contain;" />
           <div class="brand-text">
@@ -56,7 +150,7 @@ const viewConstructionRecord = (record) => {
     <!-- 操作按钮 - 浮动白色卡片 -->
     <div style="margin: -20px 20px 20px; background-color: white; border-radius: 16px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); padding: 16px; position: relative; z-index: 10;">
       <el-button type="danger" round size="small" style="width: 100%; height: 44px; font-size: 16px;" @click="addConstructionRecord">
-        <el-icon><Plus /></el-icon>
+        <Plus style="margin-right: 8px;" />
         新增施工记录
       </el-button>
     </div>
@@ -106,6 +200,94 @@ const viewConstructionRecord = (record) => {
         </div>
       </div>
     </div>
+
+    <!-- 新增施工记录弹窗 -->
+    <el-dialog
+      title="新增施工记录"
+      v-model="dialogVisible"
+      width="90%"
+      :before-close="closeDialog"
+      center
+    >
+      <el-form ref="formRef" :model="form" :rules="rules" label-width="100px" style="max-height: 60vh; overflow-y: auto;">
+        <el-form-item label="关联工单" prop="workOrderId">
+          <el-select v-model="form.workOrderId" placeholder="请选择关联工单" style="width: 100%;">
+            <el-option
+              v-for="workOrder in workOrders"
+              :key="workOrder.id"
+              :label="workOrder.id + ' - ' + workOrder.name"
+              :value="workOrder.id"
+            ></el-option>
+          </el-select>
+        </el-form-item>
+        
+        <el-form-item label="施工日期" prop="date">
+          <el-date-picker
+            v-model="form.date"
+            type="date"
+            placeholder="请选择施工日期"
+            style="width: 100%;"
+          ></el-date-picker>
+        </el-form-item>
+        
+        <el-form-item label="施工内容" prop="content">
+          <el-input
+            v-model="form.content"
+            type="textarea"
+            :rows="4"
+            placeholder="请输入施工内容"
+            style="width: 100%;"
+          ></el-input>
+        </el-form-item>
+        
+        <el-form-item label="施工照片">
+          <el-upload
+            :limit="9"
+            :file-list="[]"
+            :auto-upload="false"
+            :on-change="handlePhotoUpload"
+            list-type="picture-card"
+            accept="image/*"
+          >
+            <Plus />
+            <template #tip>
+              <div style="margin-top: 8px; font-size: 12px; color: #909399;">
+                最多上传9张照片
+              </div>
+            </template>
+          </el-upload>
+          
+          <!-- 照片预览 -->
+          <div v-if="form.photos.length > 0" style="margin-top: 16px;">
+            <div style="font-size: 12px; color: #606266; margin-bottom: 8px;">已上传照片：</div>
+            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+              <div
+                v-for="(photo, index) in form.photos"
+                :key="index"
+                style="position: relative; width: 80px; height: 80px; border-radius: 4px; overflow: hidden;"
+              >
+                <img :src="photo" style="width: 100%; height: 100%; object-fit: cover;" alt="施工照片" />
+                <el-button
+                  type="text"
+                  size="small"
+                  style="position: absolute; top: 0; right: 0; color: white; background: rgba(0, 0, 0, 0.5); padding: 0; width: 20px; height: 20px; line-height: 20px; border-radius: 0;"
+                  @click.stop="removePhoto(index)"
+                >
+                  ✕
+                </el-button>
+              </div>
+            </div>
+          </div>
+        </el-form-item>
+      </el-form>
+      
+      <template #footer>
+        <span class="dialog-footer">
+          <el-button @click="closeDialog">取消</el-button>
+          <el-button type="primary" @click="submitForm">提交</el-button>
+        </span>
+      </template>
+    </el-dialog>
   </div>
 </template>
 

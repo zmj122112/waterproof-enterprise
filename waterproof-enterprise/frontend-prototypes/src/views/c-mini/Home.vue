@@ -42,7 +42,7 @@ const goToAppointment = () => router.push('/c-mini/appointment')
 <template>
   <div class="page-container" style="min-height: 100vh; background-color: #f5f7fa; padding-bottom: 100px;">
     
-    <div class="header-section" style="background-color: #E60012; border-bottom-left-radius: 32px; border-bottom-right-radius: 32px; padding-top: 40px; padding-bottom: 100px; position: relative; z-index: 0;">
+    <div class="header-section" style="background-color: #CC0010; border-bottom-left-radius: 32px; border-bottom-right-radius: 32px; padding-top: 40px; padding-bottom: 100px; position: relative; z-index: 0;">
       <div class="header-content" style="padding: 0 20px;">
         <div class="top-bar" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
           <div class="brand-info" style="display: flex; align-items: center;">
@@ -89,8 +89,8 @@ const goToAppointment = () => router.push('/c-mini/appointment')
     <div class="section-card" style="margin-top: 15px; background: white; margin-left: 20px; margin-right: 20px; border-radius: 20px; padding: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); position: relative; z-index: 10;">
       <h2 class="section-title" style="font-size: 18px; font-weight: bold; color: #333; margin: 0 0 15px 0; border-left: 4px solid #E60012; padding-left: 10px;">核心服务</h2>
       <div class="service-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
-        <div v-for="service in coreServices" :key="service.id" class="service-item" style="display: flex; flex-direction: column; align-items: center; cursor: pointer;">
-          <div class="service-icon-bg" style="width: 44px; height: 44px; background-color: #FFF0F0; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 8px;">{{ service.icon }}</div>
+        <div v-for="service in coreServices" :key="service.id" class="service-item" style="display: flex; flex-direction: column; align-items: center; cursor: pointer; transition: all 0.3s ease;" @click="goToRepairEstimate()" @mouseenter="$event.target.style.transform = 'translateY(-2px)'; $event.target.style.boxShadow = '0 4px 8px rgba(0,0,0,0.1)';" @mouseleave="$event.target.style.transform = 'translateY(0)'; $event.target.style.boxShadow = 'none';">
+          <div class="service-icon-bg" style="width: 44px; height: 44px; background-color: #FFF0F0; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 8px; transition: all 0.3s ease;">{{ service.icon }}</div>
           <span class="service-name" style="font-size: 12px; color: #333;">{{ service.title }}</span>
         </div>
       </div>

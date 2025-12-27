@@ -66,7 +66,7 @@ onMounted(() => {
 <template>
   <div class="address-management-page" style="min-height: 100vh; background-color: #f5f7fa; padding-bottom: 100px;">
     <!-- 页面标题栏 -->
-    <div style="background-color: #E60012; border-bottom-left-radius: 32px; border-bottom-right-radius: 32px; padding: 20px 20px 30px; text-align: center; position: relative;">
+    <div style="background-color: #CC0010; border-bottom-left-radius: 32px; border-bottom-right-radius: 32px; padding: 20px 20px 30px; text-align: center; position: relative;">
       <a href="/c-mini/user-center" style="position: absolute; left: 10px; top: 10px; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px; cursor: pointer; z-index: 99999; background: rgba(255,255,255,0.1); border-radius: 50%; text-decoration: none;">
         <el-icon><ArrowLeft /></el-icon>
       </a>
@@ -90,14 +90,14 @@ onMounted(() => {
           <div style="display: flex; align-items: center; gap: 12px;">
             <div style="font-weight: 500; font-size: 16px; color: #111827;">{{ address.name }}</div>
             <div style="font-size: 14px; color: #6b7280;">{{ address.phone }}</div>
-            <div v-if="address.isDefault" style="background: #FEE2E2; color: #E60012; font-size: 12px; padding: 2px 8px; border-radius: 12px;">默认地址</div>
+            <div v-if="address.isDefault" style="background: #FEE2E2; color: #CC0010; font-size: 12px; padding: 2px 8px; border-radius: 12px;">默认地址</div>
           </div>
           <div style="display: flex; gap: 8px;">
             <div style="width: 32px; height: 32px; background: #F3F4F6; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer;" @click="editAddress(address.id)">
               <el-icon style="color: #6b7280;"><Edit /></el-icon>
             </div>
             <div style="width: 32px; height: 32px; background: #FEE2E2; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer;" @click="deleteAddress(address.id)">
-              <el-icon style="color: #E60012;"><Delete /></el-icon>
+              <el-icon style="color: #CC0010;"><Delete /></el-icon>
             </div>
           </div>
         </div>
@@ -109,7 +109,7 @@ onMounted(() => {
         
         <!-- 地址操作 -->
         <div v-if="!address.isDefault" style="text-align: right;">
-          <button @click="setDefaultAddress(address.id)" style="background: white; border: 1px solid #E60012; color: #E60012; font-size: 12px; padding: 4px 12px; border-radius: 16px; cursor: pointer;">
+          <button @click="setDefaultAddress(address.id)" style="background: white; border: 1px solid #CC0010; color: #CC0010; font-size: 12px; padding: 4px 12px; border-radius: 16px; cursor: pointer;">
             设置为默认地址
           </button>
         </div>

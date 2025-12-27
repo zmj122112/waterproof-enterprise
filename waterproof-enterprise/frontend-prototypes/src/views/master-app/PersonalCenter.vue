@@ -62,23 +62,17 @@ const logout = () => {
 <template>
   <div class="personal-center-page" style="min-height: 100vh; background-color: #f5f7fa; padding-bottom: 100px;">
     <!-- 红色顶部区域 -->
-    <div style="background-color: #E60012; border-bottom-left-radius: 32px; border-bottom-right-radius: 32px; padding-top: 40px; padding-bottom: 80px; position: relative; z-index: 0;">
-      <div style="padding: 0 20px;">
-        <div style="display: flex; justify-content: flex-end;">
-          <el-button type="text" style="color: white;">
-            <el-icon size="24"><Setting /></el-icon>
-          </el-button>
+    <div class="header-section" style="background-color: #CC0010; border-bottom-left-radius: 32px; border-bottom-right-radius: 32px; padding-top: 40px; padding-bottom: 30px; position: relative; z-index: 0;">
+      <div class="header-content" style="padding: 0 20px;">
+        <div class="brand-info" style="display: flex; align-items: center; margin-bottom: 16px;">
+          <img src="/logo.png" class="logo-img" style="width: 40px; height: 40px; border-radius: 50%; background-color: white; padding: 2px; margin-right: 10px; object-fit: contain;" />
+          <div class="brand-text">
+            <div class="brand-name" style="color: white; font-size: 18px; font-weight: bold;">月星防水</div>
+            <div class="brand-slogan" style="color: rgba(255,255,255,0.8); font-size: 12px;">Since 1947</div>
+          </div>
         </div>
         
-        <div style="display: flex; align-items: center; gap: 16px; margin-top: 24px;">
-          <div style="width: 80px; height: 80px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #E60012; font-size: 32px; font-weight: bold; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);">
-            {{ userInfo.avatar }}
-          </div>
-          <div style="flex: 1;">
-            <div style="font-size: 24px; font-weight: 700; color: white; margin-bottom: 8px;">{{ userInfo.name }}</div>
-            <div style="font-size: 14px; background-color: rgba(255, 255, 255, 0.2); padding: 4px 12px; border-radius: 16px; color: white; display: inline-block;">{{ userInfo.level }}</div>
-          </div>
-        </div>
+        <div class="page-title" style="color: white; font-size: 24px; font-weight: bold; margin: 0;">个人中心</div>
       </div>
     </div>
 

@@ -82,7 +82,7 @@ onMounted(() => {
 <template>
   <div class="product-list-page" style="min-height: 100vh; background-color: #f5f7fa; padding-bottom: 100px;">
     <!-- 页面标题栏 -->
-    <div style="background-color: #E60012; border-bottom-left-radius: 32px; border-bottom-right-radius: 32px; padding: 20px 20px 30px; text-align: center; position: relative;">
+    <div style="background-color: #CC0010; border-bottom-left-radius: 32px; border-bottom-right-radius: 32px; padding: 20px 20px 30px; text-align: center; position: relative;">
       <a href="/c-mini/home" style="position: absolute; left: 10px; top: 10px; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px; cursor: pointer; z-index: 99999; background: rgba(255,255,255,0.1); border-radius: 50%; text-decoration: none;">
         <el-icon><ArrowLeft /></el-icon>
       </a>
@@ -102,7 +102,7 @@ onMounted(() => {
         >
         <button 
           @click="searchProducts" 
-          style="background: #E60012; color: white; border: none; padding: 6px 16px; border-radius: 12px; font-size: 14px; font-weight: 500; cursor: pointer;"
+          style="background: #CC0010; color: white; border: none; padding: 6px 16px; border-radius: 12px; font-size: 14px; font-weight: 500; cursor: pointer;"
         >
           搜索
         </button>
@@ -121,11 +121,11 @@ onMounted(() => {
             borderRadius: '20px',
             fontSize: '14px',
             fontWeight: selectedCategory === category ? 'bold' : 'normal',
-            color: selectedCategory === category ? '#E60012' : '#6b7280',
+            color: selectedCategory === category ? '#CC0010' : '#6b7280',
             backgroundColor: selectedCategory === category ? '#FFF0F0' : '#f3f4f6',
             cursor: 'pointer',
             transition: 'all 0.3s ease',
-            border: selectedCategory === category ? '1px solid #E60012' : '1px solid #e5e7eb'
+            border: selectedCategory === category ? '1px solid #CC0010' : '1px solid #e5e7eb'
           }"
         >
           {{ category }}
@@ -135,7 +135,7 @@ onMounted(() => {
 
     <!-- 优化后的横幅 -->
     <div style="padding: 0 16px 16px;">
-      <div style="background: linear-gradient(135deg, #E60012 0%, #FF4D4F 100%); border-radius: 20px; padding: 20px; display: flex; align-items: center; gap: 16px; color: white; box-shadow: 0 6px 20px rgba(0,0,0,0.15);">
+      <div style="background: linear-gradient(135deg, #CC0010 0%, #FF4D4F 100%); border-radius: 20px; padding: 20px; display: flex; align-items: center; gap: 16px; color: white; box-shadow: 0 6px 20px rgba(0,0,0,0.15);">
         <div style="font-size: 48px;">🛡️</div>
         <div style="flex: 1;">
           <div style="font-size: 16px; font-weight: bold; margin-bottom: 4px;">专业防水解决方案</div>
@@ -162,7 +162,7 @@ onMounted(() => {
           @mouseleave="$event.target.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)'"
         >
           <!-- 热销标签 -->
-          <div v-if="product.isHot" style="position: absolute; top: 12px; right: 12px; background: #E60012; color: white; font-size: 10px; padding: 2px 8px; border-radius: 10px; z-index: 10;">热销</div>
+          <div v-if="product.isHot" style="position: absolute; top: 12px; right: 12px; background: #CC0010; color: white; font-size: 10px; padding: 2px 8px; border-radius: 10px; z-index: 10;">热销</div>
           
           <!-- 产品图标 -->
           <div style="position: relative; margin-bottom: 12px; width: 80px; height: 80px; display: flex; align-items: center; justify-content: center; font-size: 40px;">

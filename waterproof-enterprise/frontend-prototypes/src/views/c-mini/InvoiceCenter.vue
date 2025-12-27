@@ -26,7 +26,7 @@ onMounted(() => {
 <template>
   <div class="invoice-center-page" style="background-color: #f3f4f6; min-height: 100vh;">
     <!-- 红色底部舞台 Header -->
-    <div style="background-color: #E60012; border-bottom-left-radius: 32px; border-bottom-right-radius: 32px; padding: 20px 20px 30px; text-align: center; position: relative;">
+    <div style="background-color: #CC0010; border-bottom-left-radius: 32px; border-bottom-right-radius: 32px; padding: 20px 20px 30px; text-align: center; position: relative;">
       <a href="/c-mini/user-center" style="position: absolute; left: 10px; top: 10px; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px; cursor: pointer; z-index: 99999; background: rgba(255,255,255,0.1); border-radius: 50%; text-decoration: none;">
         <el-icon><ArrowLeft /></el-icon>
       </a>
@@ -42,7 +42,7 @@ onMounted(() => {
       >
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
           <div style="display: flex; align-items: center; gap: 8px;">
-            <el-icon color="#E60012"><Document /></el-icon>
+            <el-icon color="#CC0010"><Document /></el-icon>
             <div style="font-size: 16px; font-weight: 600; color: #111827;">发票编号：{{ invoice.id }}</div>
           </div>
           <el-tag type="success" effect="light">
@@ -65,7 +65,7 @@ onMounted(() => {
           </div>
           <div>
             <div style="font-size: 12px; color: #6b7280; margin-bottom: 4px;">发票金额</div>
-            <div style="font-size: 18px; font-weight: bold; color: #E60012;">¥{{ invoice.amount }}</div>
+            <div style="font-size: 18px; font-weight: bold; color: #CC0010;">¥{{ invoice.amount }}</div>
           </div>
         </div>
         
@@ -85,7 +85,7 @@ onMounted(() => {
       
       <!-- 开发票按钮 -->
       <div style="margin-top: 20px;">
-        <el-button type="danger" round style="width: 100%;">
+        <el-button type="danger" round style="width: 100%; background-color: #CC0010; border-color: #CC0010;">
           <Document style="margin-right: 8px;" />
           申请开发票
         </el-button>

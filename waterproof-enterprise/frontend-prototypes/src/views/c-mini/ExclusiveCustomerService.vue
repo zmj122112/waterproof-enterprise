@@ -37,7 +37,7 @@ onMounted(() => {
 <template>
   <div class="exclusive-customer-service-page" style="background-color: #f3f4f6; min-height: 100vh;">
     <!-- 红色底部舞台 Header -->
-    <div style="background-color: #E60012; border-bottom-left-radius: 32px; border-bottom-right-radius: 32px; padding: 20px 20px 30px; text-align: center; position: relative;">
+    <div style="background-color: #CC0010; border-bottom-left-radius: 32px; border-bottom-right-radius: 32px; padding: 20px 20px 30px; text-align: center; position: relative;">
       <a href="/c-mini/user-center" style="position: absolute; left: 10px; top: 10px; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px; cursor: pointer; z-index: 99999; background: rgba(255,255,255,0.1); border-radius: 50%; text-decoration: none;">
         <el-icon><ArrowLeft /></el-icon>
       </a>
@@ -48,7 +48,7 @@ onMounted(() => {
     <div style="padding: 20px;">
       <div style="background-color: white; border-radius: 16px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); padding: 24px; margin-bottom: 20px;">
         <div style="display: flex; flex-direction: column; align-items: center; gap: 16px;">
-          <div style="width: 80px; height: 80px; background: #E60012; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 32px; font-weight: bold;">{{ customerService.avatar }}</div>
+          <div style="width: 80px; height: 80px; background: #CC0010; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 32px; font-weight: bold;">{{ customerService.avatar }}</div>
           <div style="text-align: center;">
             <div style="font-size: 20px; font-weight: 700; color: #111827; margin-bottom: 8px;">{{ customerService.name }}</div>
             <div style="font-size: 14px; color: #6b7280; display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 4px;">
@@ -97,7 +97,7 @@ onMounted(() => {
         
         <div style="display: flex; flex-direction: column; gap: 12px;">
           <div style="display: flex; align-items: center; gap: 12px;">
-            <div style="width: 40px; height: 40px; background-color: #fef2f2; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #E60012;">
+            <div style="width: 40px; height: 40px; background-color: #fef2f2; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #CC0010;">
               <Phone size="20" />
             </div>
             <div style="flex: 1;">
@@ -107,7 +107,7 @@ onMounted(() => {
           </div>
           
           <div style="display: flex; align-items: center; gap: 12px;">
-            <div style="width: 40px; height: 40px; background-color: #fef2f2; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #E60012;">
+            <div style="width: 40px; height: 40px; background-color: #fef2f2; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #CC0010;">
               <Location size="20" />
             </div>
             <div style="flex: 1;">

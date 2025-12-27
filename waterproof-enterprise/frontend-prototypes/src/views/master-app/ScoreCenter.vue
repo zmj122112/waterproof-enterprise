@@ -31,7 +31,7 @@ const currentLevelInfo = computed(() => {
   return {
     currentLevel: level,
     nextLevel: nextLevel,
-    progress: Math.min(100, progress),
+    progress: Math.min(100, Number(progress.toFixed(1))),
     nextScore: nextLevel.minScore
   }
 })
@@ -88,93 +88,139 @@ const goToRanking = () => {
 const goToExchangeRecord = () => {
   router.push('/master-app/exchange-record')
 }
+
+// 积分规则展开/折叠状态
+const rulesExpanded = ref(false)
+
+// 切换积分规则展开/折叠状态
+const toggleRules = () => {
+  rulesExpanded.value = !rulesExpanded.value
+}
 </script>
 
 <template>
-  <div class="score-center-page">
+  <div class="score-center-page" style="min-height: 100vh; background-color: #f5f7fa; padding-bottom: 100px;">
     <!-- 红色顶部区域 -->
-    <div class="red-top-section">
-      <h1 class="page-title">积分中心</h1>
-      <div class="score-overview">
-        <div class="score-main-info">
-          <div class="score-label">当前积分</div>
-          <div class="score-value">{{ scoreInfo.currentScore }}</div>
-          <div class="score-subtitle">累计获得积分：{{ scoreInfo.totalScore }}</div>
-        </div>
-        <div class="score-ranking">
-          <div class="ranking-label">当前排名</div>
-          <div class="ranking-value">
-            <span class="ranking-number">{{ scoreInfo.ranking }}</span>
-            <span class="ranking-text">名</span>
+    <div class="header-section" style="background-color: #CC0010; border-bottom-left-radius: 32px; border-bottom-right-radius: 32px; padding-top: 40px; padding-bottom: 30px; position: relative; z-index: 0;">
+      <div class="header-content" style="padding: 0 20px;">
+        <div class="brand-info" style="display: flex; align-items: center; margin-bottom: 16px;">
+          <img src="/logo.png" class="logo-img" style="width: 40px; height: 40px; border-radius: 50%; background-color: white; padding: 2px; margin-right: 10px; object-fit: contain;" />
+          <div class="brand-text">
+            <div class="brand-name" style="color: white; font-size: 18px; font-weight: bold;">月星防水</div>
+            <div class="brand-slogan" style="color: rgba(255,255,255,0.8); font-size: 12px;">Since 1947</div>
           </div>
-          <div class="ranking-subtitle">{{ scoreInfo.level }}</div>
+        </div>
+        
+        <div class="page-title" style="color: white; font-size: 24px; font-weight: bold; margin: 0;">积分中心</div>
+      </div>
+    </div>
+
+    <!-- 积分概览卡片 - 浮动白色卡片 -->
+    <div style="margin: -20px 20px 20px; background-color: white; border-radius: 16px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); padding: 16px; position: relative; z-index: 10;">
+      <div class="score-overview" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+        <!-- 当前积分 -->
+        <div class="score-info" style="text-align: left;">
+          <div class="score-label" style="font-size: 14px; color: #6b7280; margin-bottom: 4px;">当前积分</div>
+          <div class="score-value" style="font-size: 36px; font-weight: bold; color: #E60012; margin-bottom: 4px;">{{ scoreInfo.currentScore }}</div>
+          <div class="score-subtitle" style="font-size: 12px; color: #9ca3af;">累计获得积分：{{ scoreInfo.totalScore }}</div>
+        </div>
+        <!-- 当前排名 -->
+        <div class="ranking-info" style="text-align: right;">
+          <div class="ranking-label" style="font-size: 14px; color: #6b7280; margin-bottom: 4px;">当前排名</div>
+          <div class="ranking-value" style="display: flex; align-items: baseline; justify-content: flex-end; margin-bottom: 4px;">
+            <span class="ranking-number" style="font-size: 32px; font-weight: bold; color: #E60012;">{{ scoreInfo.ranking }}</span>
+            <span class="ranking-text" style="font-size: 16px; color: #6b7280; margin-left: 2px;">名</span>
+          </div>
+          <div class="ranking-subtitle" style="font-size: 12px; color: #9ca3af;">{{ scoreInfo.level }}</div>
         </div>
       </div>
     </div>
 
-    <!-- 积分等级进度条卡片 -->
-    <el-card class="floating-card level-progress-card">
+    <!-- 积分等级进度条卡片 - 浮动白色卡片 -->
+    <div style="margin: 0 20px 20px; background-color: white; border-radius: 16px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); padding: 16px; position: relative; z-index: 10;">
       <div class="level-progress-section">
-        <div class="level-info">
-          <span class="current-level">{{ currentLevelInfo.currentLevel.name }}</span>
-          <span class="progress-text">距离{{ currentLevelInfo.nextLevel.name }}还差{{ currentLevelInfo.nextScore - scoreInfo.currentScore }}分</span>
+        <div class="level-info" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+          <span class="current-level" style="font-size: 16px; font-weight: 600; color: #E60012;">{{ currentLevelInfo.currentLevel.name }}</span>
+          <span class="progress-text" style="font-size: 13px; color: #6b7280;">距离{{ currentLevelInfo.nextLevel.name }}还差{{ currentLevelInfo.nextScore - scoreInfo.currentScore }}分</span>
         </div>
         <el-progress 
           :percentage="currentLevelInfo.progress" 
           :stroke-width="8" 
           :color="['#d4af37', '#003366']" 
+          style="margin-bottom: 8px;"
         />
-        <div class="level-range">
+        <div class="level-range" style="display: flex; justify-content: space-between; font-size: 12px; color: #9ca3af;">
           <span>{{ currentLevelInfo.currentLevel.minScore }}分</span>
           <span>{{ currentLevelInfo.currentLevel.maxScore === Infinity ? '∞' : currentLevelInfo.currentLevel.maxScore }}分</span>
         </div>
       </div>
-    </el-card>
+    </div>
 
-    <!-- 操作按钮组卡片 -->
-    <el-card class="floating-card action-buttons-card">
-      <div class="score-actions">
-        <el-button type="primary" @click="goToScoreMall" class="action-btn">
-          <ShoppingCart class="btn-icon" />
+    <!-- 操作按钮组卡片 - 浮动白色卡片 -->
+    <div style="margin: 0 20px 20px; background-color: white; border-radius: 16px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); padding: 16px 12px; position: relative; z-index: 10; overflow: hidden;">
+      <div class="score-actions" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
+        <el-button type="primary" @click="goToScoreMall" style="flex: 1; height: 40px; font-size: 14px; border-radius: 20px; background-color: #E60012; border-color: #E60012; padding: 0 8px;">
+          <ShoppingCart style="margin-right: 4px; font-size: 12px;" />
           积分商城
         </el-button>
-        <el-button type="primary" @click="goToExchangeRecord" class="action-btn">
-          <Document class="btn-icon" />
+        <el-button type="primary" @click="goToExchangeRecord" style="flex: 1; height: 40px; font-size: 14px; border-radius: 20px; background-color: #E60012; border-color: #E60012; padding: 0 8px;">
+          <Document style="margin-right: 4px; font-size: 12px;" />
           兑换记录
         </el-button>
-        <el-button type="primary" @click="goToRanking" class="action-btn">
-          <Star class="btn-icon" />
+        <el-button type="primary" @click="goToRanking" style="flex: 1; height: 40px; font-size: 14px; border-radius: 20px; background-color: #E60012; border-color: #E60012; padding: 0 8px;">
+          <Star style="margin-right: 4px; font-size: 12px;" />
           积分排名
         </el-button>
       </div>
-    </el-card>
+    </div>
 
     <!-- 积分规则 -->
-    <el-card class="score-rules-card">
-      <template #header>
-        <div class="card-header">
-          <span>积分规则</span>
+    <div style="margin: 0 20px 20px; background-color: white; border-radius: 16px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); padding: 16px; position: relative; z-index: 10;">
+      <div 
+        class="card-header" 
+        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; cursor: pointer;"
+        @click="toggleRules"
+      >
+        <span style="font-size: 18px; font-weight: 600; color: #111827;">积分规则</span>
+        <div style="transition: transform 0.3s ease;">
+          <!-- 折叠状态显示向右箭头，展开状态显示向下箭头 -->
+          <svg width="16" height="16" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path 
+              :d="rulesExpanded ? 'M128 384L512 768L896 384' : 'M384 128L768 512L384 896'" 
+              stroke="#606266" 
+              stroke-width="160" 
+              stroke-linecap="round" 
+              stroke-linejoin="round"/>
+          </svg>
         </div>
-      </template>
+      </div>
       
-      <div class="rules-container">
+      <div 
+        class="rules-container" 
+        v-show="rulesExpanded"
+        style="padding: 0; overflow: hidden; transition: all 0.3s ease; max-height: 1000px; opacity: 1; visibility: visible; margin-bottom: 0; transform: translateY(0);">
+
         <div 
           v-for="(rules, type) in groupedRules" 
           :key="type" 
-          class="rule-group"
+          class="rule-group" 
+          style="margin-bottom: 24px;"
         >
-          <div class="group-title">{{ type }}</div>
-          <div class="rules-list">
+          <div class="group-title" style="font-size: 16px; font-weight: 500; color: #E60012; margin-bottom: 12px;">
+            {{ type }}
+          </div>
+          <div class="rules-list" style="display: flex; flex-direction: column; gap: 8px;">
             <div 
               v-for="rule in rules" 
               :key="rule.id" 
-              class="rule-item"
+              class="rule-item" 
+              style="background-color: #f9fafb; border: 1px solid #E5E7EB; border-radius: 12px; padding: 12px; transition: all 0.3s ease;"
             >
-              <div class="rule-content">
-                <span class="rule-action">{{ rule.description }}</span>
+              <div class="rule-content" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                <span class="rule-action" style="font-size: 14px; color: #111827; flex: 1;">{{ rule.description }}</span>
                 <span 
                   class="rule-score" 
-                  :class="rule.score.startsWith('+') ? 'score-positive' : 'score-negative'"
+                  :style="rule.score.startsWith('+') ? 'font-size: 14px; font-weight: 600; color: #10B981;' : 'font-size: 14px; font-weight: 600; color: #EF4444;'"
                 >
                   {{ rule.score }}
                 </span>
@@ -183,40 +229,38 @@ const goToExchangeRecord = () => {
           </div>
         </div>
       </div>
-    </el-card>
+    </div>
 
     <!-- 积分流水 -->
-    <el-card class="score-history-card">
-      <template #header>
-        <div class="card-header">
-          <span>积分流水</span>
-        </div>
-      </template>
+    <div style="margin: 0 20px 20px; background-color: white; border-radius: 16px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); padding: 16px; position: relative; z-index: 10;">
+      <div class="card-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+        <span style="font-size: 18px; font-weight: 600; color: #111827;">积分流水</span>
+      </div>
       
-      <div class="history-container">
+      <div class="history-container" style="padding: 0;">
         <el-table
           :data="scoreHistory"
-          style="width: 100%"
+          style="width: 100%;"
           stripe
           :show-header="false"
         >
-          <el-table-column prop="time" width="160">
+          <el-table-column prop="time" width="140">
             <template #default="scope">
-              <div class="history-time">{{ scope.row.time }}</div>
-              <div class="history-type">{{ scope.row.type }}</div>
+              <div class="history-time" style="font-size: 12px; color: #9ca3af; margin-bottom: 2px;">{{ scope.row.time }}</div>
+              <div class="history-type" style="font-size: 12px; color: #E60012; font-weight: 500;">{{ scope.row.type }}</div>
             </template>
           </el-table-column>
-          <el-table-column prop="action" min-width="180">
+          <el-table-column prop="action" min-width="160">
             <template #default="scope">
-              <div class="history-action">{{ scope.row.action }}</div>
-              <div class="history-order-id">工单：{{ scope.row.orderId }}</div>
+              <div class="history-action" style="font-size: 14px; color: #111827; margin-bottom: 2px;">{{ scope.row.action }}</div>
+              <div class="history-order-id" style="font-size: 12px; color: #6b7280;">工单：{{ scope.row.orderId }}</div>
             </template>
           </el-table-column>
           <el-table-column prop="score" width="100" align="right">
             <template #default="scope">
               <span 
                 class="history-score" 
-                :class="scope.row.score.startsWith('+') ? 'score-positive' : 'score-negative'"
+                :style="scope.row.score.startsWith('+') ? 'font-size: 16px; font-weight: 600; color: #10B981;' : 'font-size: 16px; font-weight: 600; color: #EF4444;'"
               >
                 {{ scope.row.score }}
               </span>
@@ -224,313 +268,10 @@ const goToExchangeRecord = () => {
           </el-table-column>
         </el-table>
       </div>
-    </el-card>
+    </div>
   </div>
 </template>
 
 <style scoped>
-.score-center-page {
-  padding: 0;
-  background-color: $bg-primary;
-  min-height: 100vh;
-}
-
-/* 红色顶部区域 */
-.red-top-section {
-  background-color: $primary-color;
-  color: white;
-  padding: $spacing-xl $spacing-md $spacing-2xl;
-  border-radius: 0 0 20px 20px;
-  box-shadow: $shadow-md;
-}
-
-.page-title {
-  font-size: $font-size-xl;
-  font-weight: $font-weight-semibold;
-  margin: 0 0 $spacing-lg;
-  text-align: center;
-}
-
-.score-overview {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
-
-.score-main-info {
-  text-align: center;
-}
-
-.score-label {
-  font-size: $font-size-sm;
-  opacity: 0.9;
-  margin-bottom: $spacing-xs;
-}
-
-.score-value {
-  font-size: 42px;
-  font-weight: $font-weight-bold;
-  margin-bottom: $spacing-xs;
-}
-
-.score-subtitle {
-  font-size: $font-size-xs;
-  opacity: 0.8;
-}
-
-.score-ranking {
-  text-align: center;
-}
-
-.ranking-label {
-  font-size: $font-size-sm;
-  opacity: 0.9;
-  margin-bottom: $spacing-xs;
-}
-
-.ranking-value {
-  display: flex;
-  align-items: baseline;
-  justify-content: center;
-  margin-bottom: $spacing-xs;
-}
-
-.ranking-number {
-  font-size: 36px;
-  font-weight: $font-weight-bold;
-}
-
-.ranking-text {
-  font-size: $font-size-md;
-  opacity: 0.9;
-}
-
-.ranking-subtitle {
-  font-size: $font-size-xs;
-  opacity: 0.8;
-}
-
-/* 浮动白色卡片 */
-.floating-card {
-  margin: -$spacing-lg $spacing-md $spacing-lg;
-  box-shadow: $shadow-md;
-  border-radius: $border-radius-lg;
-  overflow: hidden;
-  background-color: white;
-  position: relative;
-  z-index: 10;
-}
-
-/* 积分等级进度条卡片 */
-.level-progress-card {
-  padding: $spacing-lg;
-}
-
-.level-progress-section {
-  padding: 0;
-}
-
-.level-info {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: $spacing-sm;
-}
-
-.current-level {
-  font-size: $font-size-md;
-  font-weight: $font-weight-medium;
-  color: $primary-color;
-}
-
-.progress-text {
-  font-size: $font-size-sm;
-  color: $text-secondary;
-}
-
-.level-range {
-  display: flex;
-  justify-content: space-between;
-  margin-top: $spacing-xs;
-  font-size: $font-size-xs;
-  color: $text-tertiary;
-}
-
-/* 操作按钮组卡片 */
-.action-buttons-card {
-  margin-top: $spacing-sm;
-  padding: $spacing-lg;
-}
-
-/* 操作按钮组 */
-.score-actions {
-  display: flex;
-  justify-content: space-around;
-  gap: $spacing-sm;
-}
-
-.action-btn {
-  flex: 1;
-  margin: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 44px;
-  font-weight: $font-weight-medium;
-  background-color: $primary-color;
-  border-color: $primary-color;
-  color: white;
-}
-
-.action-btn:hover {
-  background-color: $primary-hover-color;
-  border-color: $primary-hover-color;
-}
-
-.btn-icon {
-  margin-right: 6px;
-  font-size: $font-size-md;
-}
-
-/* 积分规则卡片 */
-.score-rules-card {
-  margin: $spacing-sm $spacing-md $spacing-lg;
-  box-shadow: $shadow-sm;
-  border-radius: $border-radius-lg;
-  background-color: white;
-}
-
-.card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.card-header span {
-  font-size: $font-size-lg;
-  font-weight: $font-weight-semibold;
-  color: $text-primary;
-}
-
-.rules-container {
-  padding: $spacing-sm 0;
-}
-
-.rule-group {
-  margin-bottom: $spacing-lg;
-}
-
-.group-title {
-  font-size: $font-size-md;
-  font-weight: $font-weight-medium;
-  color: $primary-color;
-  margin-bottom: $spacing-sm;
-  padding: 0 $spacing-sm;
-}
-
-.rules-list {
-  display: flex;
-  flex-direction: column;
-  gap: $spacing-xs;
-}
-
-.rule-item {
-  padding: $spacing-sm;
-  background-color: $bg-secondary;
-  border-radius: $border-radius-sm;
-  transition: all 0.3s ease;
-}
-
-.rule-item:hover {
-  background-color: $bg-tertiary;
-  transform: translateY(-2px);
-  box-shadow: $shadow-sm;
-}
-
-.rule-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-}
-
-.rule-action {
-  font-size: $font-size-sm;
-  color: $text-primary;
-  flex: 1;
-}
-
-.rule-score {
-  font-size: $font-size-sm;
-  font-weight: $font-weight-medium;
-  min-width: 60px;
-  text-align: right;
-}
-
-.score-positive {
-  color: $success-color;
-}
-
-.score-negative {
-  color: $error-color;
-}
-
-/* 积分流水卡片 */
-.score-history-card {
-  margin: 0 $spacing-md $spacing-lg;
-  box-shadow: $shadow-sm;
-  border-radius: $border-radius-lg;
-  background-color: white;
-}
-
-.history-container {
-  padding: $spacing-sm 0;
-}
-
-/* 积分流水表格样式 */
-:deep(.el-table__row) {
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-:deep(.el-table__row:hover) {
-  background-color: $bg-secondary;
-}
-
-:deep(.el-table__body-wrapper) {
-  border-radius: $border-radius-sm;
-}
-
-:deep(.el-table__cell) {
-  padding: $spacing-sm $spacing-md;
-  border-bottom: 1px solid $border-color;
-}
-
-.history-time {
-  font-size: $font-size-xs;
-  color: $text-tertiary;
-  margin-bottom: 2px;
-}
-
-.history-type {
-  font-size: $font-size-xs;
-  color: $primary-color;
-  font-weight: $font-weight-medium;
-}
-
-.history-action {
-  font-size: $font-size-sm;
-  color: $text-primary;
-  margin-bottom: 2px;
-}
-
-.history-order-id {
-  font-size: $font-size-xs;
-  color: $text-secondary;
-}
-
-.history-score {
-  font-size: $font-size-md;
-  font-weight: $font-weight-medium;
-}
+/* 移除旧样式，使用内联样式替代 */
 </style>

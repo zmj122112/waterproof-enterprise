@@ -1,6 +1,9 @@
 <script setup>
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 import { ElMessage, ElMessageBox } from 'element-plus'
+
+const router = useRouter()
 
 // 完工确认列表数据
 const completionConfirmations = ref([
@@ -37,16 +40,15 @@ const confirmCompletion = (confirmation) => {
 
 // 查看详情
 const viewDetail = (confirmation) => {
-  ElMessage.info(`查看完工确认详情：${confirmation.id}`)
-  console.log('查看完工确认详情:', confirmation)
+  router.push(`/master-app/completion-confirmation/${confirmation.id}`)
 }
 </script>
 
 <template>
   <div class="completion-confirmation-page" style="min-height: 100vh; background-color: #f5f7fa; padding-bottom: 100px;">
     <!-- 红色顶部区域 -->
-    <div style="background-color: #E60012; border-bottom-left-radius: 32px; border-bottom-right-radius: 32px; padding-top: 40px; padding-bottom: 30px; position: relative; z-index: 0;">
-      <div style="padding: 0 20px;">
+    <div class="header-section" style="background-color: #CC0010; border-bottom-left-radius: 32px; border-bottom-right-radius: 32px; padding-top: 40px; padding-bottom: 30px; position: relative; z-index: 0;">
+      <div class="header-content" style="padding: 0 20px;">
         <div class="brand-info" style="display: flex; align-items: center; margin-bottom: 16px;">
           <img src="/logo.png" class="logo-img" style="width: 40px; height: 40px; border-radius: 50%; background-color: white; padding: 2px; margin-right: 10px; object-fit: contain;" />
           <div class="brand-text">
@@ -60,54 +62,55 @@ const viewDetail = (confirmation) => {
     </div>
 
     <!-- 完工确认列表 - 浮动白色卡片 -->
-    <div style="margin: -20px 20px 20px; position: relative; z-index: 10;">
-      <div 
-        v-for="confirmation in completionConfirmations" 
-        :key="confirmation.id" 
-        style="background-color: white; border: 1px solid #E5E7EB; border-radius: 16px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); padding: 16px; margin-bottom: 16px; transition: all 0.3s ease;"
-      >
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid #f0f0f0;">
-          <div style="font-size: 14px; font-weight: 600; color: #111827;">确认编号：{{ confirmation.id }}</div>
-          <el-tag :type="confirmation.status === '已确认' ? 'primary' : 'primary'" size="small" style="font-size: 12px; padding: 4px 12px;">
-            {{ confirmation.status }}
-          </el-tag>
-        </div>
-        
-        <div style="margin-bottom: 16px;">
-          <div style="display: flex; flex-wrap: wrap; margin-bottom: 8px;">
-            <span style="width: 80px; font-weight: 500; color: #111827; margin-right: 16px;">关联工单：</span>
-            <span style="flex: 1; color: #6b7280; line-height: 1.5;">{{ confirmation.workOrderId }}</span>
+    <div style="margin: -20px 20px 20px; background-color: white; border-radius: 16px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); padding: 16px; position: relative; z-index: 10;">
+      <!-- 完工确认列表 -->
+      <div class="completion-confirmation-list" style="margin-top: 0;">
+        <div 
+          v-for="confirmation in completionConfirmations" 
+          :key="confirmation.id" 
+          style="background-color: white; border: 1px solid #E5E7EB; border-radius: 16px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); padding: 16px; margin-bottom: 16px; transition: all 0.3s ease;"
+        >
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid #f0f0f0;">
+            <div style="font-size: 14px; font-weight: 600; color: #111827;">确认编号：{{ confirmation.id }}</div>
+            <div :style="confirmation.status === '已确认' ? 'font-size: 12px; color: #10B981; background-color: #D1FAE5; padding: 4px 12px; border-radius: 16px;' : 'font-size: 12px; color: #E60012; background-color: #fef2f2; padding: 4px 12px; border-radius: 16px;'">
+              {{ confirmation.status }}
+            </div>
           </div>
-          <div style="display: flex; flex-wrap: wrap; margin-bottom: 8px;">
-            <span style="width: 80px; font-weight: 500; color: #111827; margin-right: 16px;">客户名称：</span>
-            <span style="flex: 1; color: #6b7280; line-height: 1.5;">{{ confirmation.customerName }}</span>
+          
+          <div style="margin-bottom: 16px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <div style="font-size: 16px; font-weight: 500; color: #111827;">{{ confirmation.customerName }}</div>
+              <div style="font-size: 13px; color: #6b7280;">{{ confirmation.workOrderId }}</div>
+            </div>
+            <div style="font-size: 13px; color: #6b7280; line-height: 1.4; margin-bottom: 8px;">
+              <span style="font-weight: 500; color: #111827;">关联工单：</span>{{ confirmation.workOrderId }}
+            </div>
+            <div style="font-size: 13px; color: #6b7280; line-height: 1.4;">
+              <span style="font-weight: 500; color: #111827;">施工地址：</span>{{ confirmation.address }}
+            </div>
           </div>
-          <div style="display: flex; flex-wrap: wrap;">
-            <span style="width: 80px; font-weight: 500; color: #111827; margin-right: 16px;">施工地址：</span>
-            <span style="flex: 1; color: #6b7280; line-height: 1.5;">{{ confirmation.address }}</span>
+          
+          <div style="display: flex; gap: 12px;">
+            <el-button
+              type="primary"
+              round
+              size="small"
+              @click="viewDetail(confirmation)"
+              style="flex: 1;"
+            >
+              查看详情
+            </el-button>
+            <el-button
+              v-if="confirmation.status === '待确认'"
+              type="danger"
+              round
+              size="small"
+              @click="confirmCompletion(confirmation)"
+              style="flex: 1;"
+            >
+              确认完工
+            </el-button>
           </div>
-        </div>
-        
-        <div style="display: flex; flex-direction: column; gap: 8px;">
-          <el-button
-            type="primary"
-            round
-            size="small"
-            block
-            @click="viewDetail(confirmation)"
-          >
-            查看详情
-          </el-button>
-          <el-button
-            v-if="confirmation.status === '待确认'"
-            type="primary"
-            round
-            size="small"
-            block
-            @click="confirmCompletion(confirmation)"
-          >
-            确认完工
-          </el-button>
         </div>
       </div>
     </div>

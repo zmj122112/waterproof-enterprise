@@ -43,7 +43,7 @@ onMounted(() => {
 <template>
   <div class="project-case-list-page" style="min-height: 100vh; background-color: #f5f7fa; padding-bottom: 100px;">
     <!-- 页面标题栏 -->
-    <div style="background-color: #E60012; border-bottom-left-radius: 32px; border-bottom-right-radius: 32px; padding: 20px 20px 30px; text-align: center; position: relative;">
+    <div style="background-color: #CC0010; border-bottom-left-radius: 32px; border-bottom-right-radius: 32px; padding: 20px 20px 30px; text-align: center; position: relative;">
       <a href="/c-mini/home" style="position: absolute; left: 10px; top: 10px; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px; cursor: pointer; z-index: 99999; background: rgba(255,255,255,0.1); border-radius: 50%; text-decoration: none;">
         <el-icon><ArrowLeft /></el-icon>
       </a>
@@ -63,7 +63,7 @@ onMounted(() => {
         >
         <button 
           @click="searchCases" 
-          style="background: #E60012; color: white; border: none; padding: 6px 16px; border-radius: 12px; font-size: 14px; font-weight: 500; cursor: pointer;"
+          style="background: #CC0010; color: white; border: none; padding: 6px 16px; border-radius: 12px; font-size: 14px; font-weight: 500; cursor: pointer;"
         >
           搜索
         </button>
@@ -95,7 +95,7 @@ onMounted(() => {
           <div style="padding: 16px;">
             <!-- 分类和日期 -->
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-              <div style="font-size: 12px; color: #E60012; background: #FFF0F0; padding: 2px 8px; border-radius: 12px; display: inline-block;">
+              <div style="font-size: 12px; color: #CC0010; background: #FFF0F0; padding: 2px 8px; border-radius: 12px; display: inline-block;">
                 {{ caseItem.category }}
               </div>
               <div style="font-size: 12px; color: #9ca3af;">{{ caseItem.date }}</div>

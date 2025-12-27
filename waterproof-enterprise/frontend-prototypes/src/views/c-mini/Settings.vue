@@ -60,7 +60,7 @@ onMounted(() => {
 <template>
   <div class="settings-page" style="background-color: #f3f4f6; min-height: 100vh;">
     <!-- 红色底部舞台 Header -->
-    <div style="background-color: #E60012; border-bottom-left-radius: 32px; border-bottom-right-radius: 32px; padding: 20px 20px 30px; text-align: center; position: relative;">
+    <div style="background-color: #CC0010; border-bottom-left-radius: 32px; border-bottom-right-radius: 32px; padding: 20px 20px 30px; text-align: center; position: relative;">
       <a href="/c-mini/user-center" style="position: absolute; left: 10px; top: 10px; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px; cursor: pointer; z-index: 99999; background: rgba(255,255,255,0.1); border-radius: 50%; text-decoration: none;">
         <el-icon><ArrowLeft /></el-icon>
       </a>
@@ -86,7 +86,7 @@ onMounted(() => {
             @mouseleave="$event.target.style.backgroundColor = ''"
           >
             <div style="display: flex; align-items: center; gap: 12px;">
-              <div style="width: 40px; height: 40px; background-color: #fef2f2; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #E60012;">
+              <div style="width: 40px; height: 40px; background-color: #fef2f2; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #CC0010;">
                 <component :is="item.icon" size="20" />
               </div>
               <div style="font-size: 14px; font-weight: 500; color: #111827;">{{ item.name }}</div>

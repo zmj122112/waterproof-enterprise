@@ -45,25 +45,25 @@ const logout = () => {
 <template>
   <div class="user-center-page" style="background-color: #f3f4f6; min-height: 100vh; position: relative;">
     <!-- 红色底部舞台 Header -->
-    <div style="background-color: #E60012; border-bottom-left-radius: 32px; border-bottom-right-radius: 32px; padding: 40px 20px 80px; text-align: center; position: relative; overflow: hidden;">
+    <div style="background-color: #CC0010; border-bottom-left-radius: 32px; border-bottom-right-radius: 32px; padding: 20px 20px 30px; text-align: center; position: relative; overflow: hidden;">
       <!-- 用户信息 -->
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
         <div style="width: 24px;"></div> <!-- 占位 -->
         <div style="color: white; font-size: 20px; font-weight: 700;">个人中心</div>
         <div style="width: 24px;"></div> <!-- 占位 -->
       </div>
       
-      <div style="display: flex; align-items: center; gap: 16px; justify-content: center;">
-        <img :src="userInfo.avatar" alt="用户头像" style="width: 80px; height: 80px; border-radius: 50%; border: 3px solid white; background-color: white; object-fit: cover; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);">
-        <div style="display: flex; flex-direction: column; gap: 8px;">
-          <div style="font-size: 24px; font-weight: 700; color: white;">{{ userInfo.name }}</div>
-          <div style="font-size: 14px; background-color: rgba(255, 255, 255, 0.2); padding: 4px 12px; border-radius: 16px; color: white;">70年品牌见证官</div>
+      <div style="display: flex; align-items: center; gap: 12px; justify-content: center;">
+        <img :src="userInfo.avatar" alt="用户头像" style="width: 60px; height: 60px; border-radius: 50%; border: 2px solid white; background-color: white; object-fit: cover; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);">
+        <div style="display: flex; flex-direction: column; gap: 4px;">
+          <div style="font-size: 18px; font-weight: 700; color: white;">{{ userInfo.name }}</div>
+          <div style="font-size: 12px; background-color: rgba(255, 255, 255, 0.2); padding: 2px 10px; border-radius: 12px; color: white; display: inline-block;">70年品牌见证官</div>
         </div>
       </div>
     </div>
 
     <!-- 订单状态栏 - 浮动白色卡片 -->
-    <div style="position: relative; z-index: 10; margin: -40px 20px 20px; background-color: white; border-radius: 16px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); padding: 16px;">
+    <div style="position: relative; z-index: 10; margin: -20px 20px 20px; background-color: white; border-radius: 16px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); padding: 16px;">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
         <div style="font-size: 16px; font-weight: 600; color: #111827;">我的订单</div>
         <div @click="viewAllOrders" style="font-size: 14px; color: #E60012; cursor: pointer; display: flex; align-items: center; gap: 4px;">

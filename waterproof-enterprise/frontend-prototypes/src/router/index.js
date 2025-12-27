@@ -241,9 +241,13 @@ const router = createRouter({
     // 师傅端
     {
       path: '/master-app',
-      name: 'master-app',
       component: () => import('../views/master-app/Layout.vue'),
       children: [
+        {
+          path: '',
+          name: 'master-app',
+          redirect: '/master-app/work-order-receive'
+        },
         {
           path: 'work-order-receive',
           name: 'master-app-work-order-receive',
@@ -255,9 +259,19 @@ const router = createRouter({
           component: () => import('../views/master-app/ConstructionRecord.vue')
         },
         {
+          path: 'construction-record/:id',
+          name: 'master-app-construction-record-detail',
+          component: () => import('../views/master-app/ConstructionRecordDetail.vue')
+        },
+        {
           path: 'completion-confirmation',
           name: 'master-app-completion-confirmation',
           component: () => import('../views/master-app/CompletionConfirmation.vue')
+        },
+        {
+          path: 'completion-confirmation/:id',
+          name: 'master-app-completion-confirmation-detail',
+          component: () => import('../views/master-app/CompletionConfirmationDetail.vue')
         },
         {
           path: 'score-center',
@@ -270,9 +284,59 @@ const router = createRouter({
           component: () => import('../views/master-app/ScoreMall.vue')
         },
         {
+          path: 'exchange-record',
+          name: 'master-app-exchange-record',
+          component: () => import('../views/master-app/ExchangeRecord.vue')
+        },
+        {
+          path: 'ranking',
+          name: 'master-app-ranking',
+          component: () => import('../views/master-app/Ranking.vue')
+        },
+        {
           path: 'personal-center',
           name: 'master-app-personal-center',
           component: () => import('../views/master-app/PersonalCenter.vue')
+        },
+        {
+          path: 'profile',
+          name: 'master-app-profile',
+          component: () => import('../views/master-app/Profile.vue')
+        },
+        {
+          path: 'change-password',
+          name: 'master-app-change-password',
+          component: () => import('../views/master-app/ChangePassword.vue')
+        },
+        {
+          path: 'bind-phone',
+          name: 'master-app-bind-phone',
+          component: () => import('../views/master-app/BindPhone.vue')
+        },
+        {
+          path: 'my-orders',
+          name: 'master-app-my-orders',
+          component: () => import('../views/master-app/MyOrders.vue')
+        },
+        {
+          path: 'help-center',
+          name: 'master-app-help-center',
+          component: () => import('../views/master-app/HelpCenter.vue')
+        },
+        {
+          path: 'about-us',
+          name: 'master-app-about-us',
+          component: () => import('../views/master-app/AboutUs.vue')
+        },
+        {
+          path: 'privacy-policy',
+          name: 'master-app-privacy-policy',
+          component: () => import('../views/master-app/PrivacyPolicy.vue')
+        },
+        {
+          path: 'user-agreement',
+          name: 'master-app-user-agreement',
+          component: () => import('../views/master-app/UserAgreement.vue')
         }
       ]
     }

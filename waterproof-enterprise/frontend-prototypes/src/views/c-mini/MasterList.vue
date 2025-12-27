@@ -74,7 +74,7 @@ onMounted(() => {
 <template>
   <div class="master-list-page" style="min-height: 100vh; background-color: #f5f7fa; padding-bottom: 100px;">
     <!-- 页面标题栏 -->
-    <div style="background-color: #E60012; border-bottom-left-radius: 32px; border-bottom-right-radius: 32px; padding: 20px 20px 30px; text-align: center; position: relative;">
+    <div style="background-color: #CC0010; border-bottom-left-radius: 32px; border-bottom-right-radius: 32px; padding: 20px 20px 30px; text-align: center; position: relative;">
       <a href="/c-mini/home" style="position: absolute; left: 10px; top: 10px; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px; cursor: pointer; z-index: 99999; background: rgba(255,255,255,0.1); border-radius: 50%; text-decoration: none;">
         <el-icon><ArrowLeft /></el-icon>
       </a>
@@ -94,7 +94,7 @@ onMounted(() => {
         >
         <button 
           @click="searchMasters" 
-          style="background: #E60012; color: white; border: none; padding: 6px 16px; border-radius: 12px; font-size: 14px; font-weight: 500; cursor: pointer;"
+          style="background: #CC0010; color: white; border: none; padding: 6px 16px; border-radius: 12px; font-size: 14px; font-weight: 500; cursor: pointer;"
         >
           搜索
         </button>
@@ -113,13 +113,13 @@ onMounted(() => {
            @mouseleave="$event.target.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)'">
         <!-- 师傅基本信息 -->
         <div style="display: flex; gap: 16px; margin-bottom: 12px;">
-          <div style="width: 60px; height: 60px; border-radius: 50%; background: #E60012; border: 2px solid #E60012; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; font-weight: bold;">
+          <div style="width: 60px; height: 60px; border-radius: 50%; background: #CC0010; border: 2px solid #CC0010; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; font-weight: bold;">
             {{ master.name.charAt(0) }}
           </div>
           <div style="flex: 1;">
             <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
               <div style="font-weight: 500; font-size: 16px; color: #111827;">{{ master.name }}</div>
-              <div style="background: #E60012; color: white; font-size: 12px; padding: 2px 8px; border-radius: 10px;">{{ master.title }}</div>
+              <div style="background: #CC0010; color: white; font-size: 12px; padding: 2px 8px; border-radius: 10px;">{{ master.title }}</div>
             </div>
             <div style="font-size: 14px; color: #6b7280; margin-bottom: 8px;">工号：{{ master.jobNumber }}</div>
             <div style="display: flex; gap: 16px;">
@@ -129,7 +129,7 @@ onMounted(() => {
           </div>
           <div style="display: flex; align-items: center; gap: 8px;">
             <div style="display: flex; align-items: center; gap: 4px;">
-              <span style="font-size: 14px; color: #E60012; font-weight: 500;">{{ master.rating }}</span>
+              <span style="font-size: 14px; color: #CC0010; font-weight: 500;">{{ master.rating }}</span>
               <span style="font-size: 12px; color: #6b7280;">评分</span>
             </div>
           </div>
@@ -140,7 +140,7 @@ onMounted(() => {
           <div v-for="(cert, index) in master.certifications" :key="index" 
                :style="{
                  background: cert === '金牌工长' ? '#FEE2E2' : '#DBEAFE',
-                 color: cert === '金牌工长' ? '#E60012' : '#3B82F6',
+                 color: cert === '金牌工长' ? '#CC0010' : '#3B82F6',
                  fontSize: '12px',
                  padding: '2px 8px',
                  borderRadius: '12px',

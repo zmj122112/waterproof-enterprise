@@ -49,7 +49,7 @@ const navigate = (path) => {
     <!-- 侧边导航栏 -->
     <aside class="admin-system-sidebar">
       <div class="sidebar-header">
-        <img src="/src/assets/images/moon-star-logo.svg" alt="logo" class="logo">
+        <img src="/images/moon-star-logo.svg" alt="logo" class="logo">
         <h2 class="sidebar-title">月星防水管理系统</h2>
       </div>
       <nav class="sidebar-nav">
@@ -83,7 +83,7 @@ const navigate = (path) => {
           </el-button>
           <el-dropdown>
             <el-button type="text" class="header-btn user-btn">
-              <img src="/src/assets/images/moon-star-placeholder.svg" alt="user" class="user-avatar">
+              <img src="/images/moon-star-placeholder.svg" alt="user" class="user-avatar">
               <span class="user-name">管理员</span>
               <el-icon class="el-icon--right"><ArrowDown /></el-icon>
             </el-button>

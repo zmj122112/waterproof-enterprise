@@ -31,7 +31,7 @@ const navigate = (path) => {
     <!-- 顶部导航栏 -->
     <header class="b-portal-header">
       <div class="header-left">
-        <img src="/src/assets/images/moon-star-logo.svg" alt="月星防水logo" class="logo">
+        <img src="/images/moon-star-logo.svg" alt="月星防水logo" class="logo">
         <h3 class="page-title">{{ menuItems.find(item => isActive(item.path))?.name || 'B端门户' }}</h3>
       </div>
       <div class="header-right">
@@ -40,7 +40,7 @@ const navigate = (path) => {
         </el-button>
         <el-dropdown>
             <el-button type="text" class="header-btn user-btn">
-              <img src="/src/assets/images/moon-star-placeholder.svg" alt="user" class="user-avatar">
+              <img src="/images/moon-star-placeholder.svg" alt="user" class="user-avatar">
               <el-icon class="el-icon--right"><ArrowDown /></el-icon>
             </el-button>
           <template #dropdown>

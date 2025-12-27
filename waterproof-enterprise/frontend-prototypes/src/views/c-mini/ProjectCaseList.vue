@@ -8,12 +8,12 @@ const router = useRouter()
 
 // 工程案例数据
 const projectCases = ref([
-  { id: 1, title: '某小区屋顶补漏工程', description: '解决了小区20栋楼的屋顶漏水问题', image: '/src/assets/images/waterproof-1.jpg', category: '屋顶补漏', date: '2025-12-01' },
-  { id: 2, title: '某酒店卫生间防水改造', description: '全面改造酒店100间客房的卫生间防水', image: '/src/assets/images/waterproof-2.jpg', category: '卫生间漏水', date: '2025-11-20' },
-  { id: 3, title: '某商业综合体外墙防水工程', description: '为大型商业综合体提供外墙防水解决方案', image: '/src/assets/images/waterproof-1.jpg', category: '外墙防水', date: '2025-11-10' },
-  { id: 4, title: '某别墅地下室防水处理', description: '解决别墅地下室潮湿漏水问题', image: '/src/assets/images/waterproof-2.jpg', category: '地下室防水', date: '2025-10-25' },
-  { id: 5, title: '某学校厨房防水翻新', description: '为学校食堂厨房进行防水翻新工程', image: '/src/assets/images/waterproof-1.jpg', category: '厨房漏水', date: '2025-10-15' },
-  { id: 6, title: '某写字楼阳台防水维修', description: '维修写字楼多个阳台的防水问题', image: '/src/assets/images/waterproof-2.jpg', category: '阳台漏水', date: '2025-10-05' }
+  { id: 1, title: '某小区屋顶补漏工程', description: '解决了小区20栋楼的屋顶漏水问题', image: '/images/waterproof-1.jpg', category: '屋顶补漏', date: '2025-12-01' },
+  { id: 2, title: '某酒店卫生间防水改造', description: '全面改造酒店100间客房的卫生间防水', image: '/images/waterproof-2.jpg', category: '卫生间漏水', date: '2025-11-20' },
+  { id: 3, title: '某商业综合体外墙防水工程', description: '为大型商业综合体提供外墙防水解决方案', image: '/images/waterproof-1.jpg', category: '外墙防水', date: '2025-11-10' },
+  { id: 4, title: '某别墅地下室防水处理', description: '解决别墅地下室潮湿漏水问题', image: '/images/waterproof-2.jpg', category: '地下室防水', date: '2025-10-25' },
+  { id: 5, title: '某学校厨房防水翻新', description: '为学校食堂厨房进行防水翻新工程', image: '/images/waterproof-1.jpg', category: '厨房漏水', date: '2025-10-15' },
+  { id: 6, title: '某写字楼阳台防水维修', description: '维修写字楼多个阳台的防水问题', image: '/images/waterproof-2.jpg', category: '阳台漏水', date: '2025-10-05' }
 ])
 
 // 搜索关键词

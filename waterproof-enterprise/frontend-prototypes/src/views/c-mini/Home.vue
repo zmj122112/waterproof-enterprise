@@ -25,8 +25,8 @@ const coreServices = [
 
 // 工程案例数据
 const projectCases = [
-  { id: 1, title: '某小区屋顶补漏工程', description: '解决了小区20栋楼的屋顶漏水问题', image: '/src/assets/images/waterproof-1.jpg', category: '屋顶补漏' },
-  { id: 2, title: '某酒店卫生间防水改造', description: '全面改造酒店100间客房的卫生间防水', image: '/src/assets/images/waterproof-2.jpg', category: '卫生间漏水' }
+  { id: 1, title: '某小区屋顶补漏工程', description: '解决了小区20栋楼的屋顶漏水问题', image: '/images/waterproof-1.jpg', category: '屋顶补漏' },
+  { id: 2, title: '某酒店卫生间防水改造', description: '全面改造酒店100间客房的卫生间防水', image: '/images/waterproof-2.jpg', category: '卫生间漏水' }
 ]
 
 // 客户评价

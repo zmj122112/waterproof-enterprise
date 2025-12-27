@@ -19,9 +19,9 @@ const caseDetail = ref({
   duration: '15天',
   description: '该工程主要解决小区20栋楼的屋顶漏水问题。通过专业的检测和评估，我们采用了先进的防水材料和施工工艺，对每栋楼的屋顶进行了全面的防水处理。工程完成后，经过多次暴雨考验，所有楼栋均未出现漏水情况，得到了小区居民和物业的一致好评。',
   images: [
-    '/src/assets/images/waterproof-1.jpg',
-    '/src/assets/images/waterproof-2.jpg',
-    '/src/assets/images/waterproof-1.jpg'
+    '/images/waterproof-1.jpg',
+    '/images/waterproof-2.jpg',
+    '/images/waterproof-1.jpg'
   ],
   challenges: [
     '屋顶结构复杂，施工难度大',

@@ -25,8 +25,8 @@ const reviewDetail = ref({
   serviceAddress: '上海市浦东新区张杨路1000号',
   followUp: '维修后一周，师傅主动回访，询问使用情况，非常贴心。',
   images: [
-    '/src/assets/images/waterproof-1.jpg',
-    '/src/assets/images/waterproof-2.jpg'
+    '/images/waterproof-1.jpg',
+    '/images/waterproof-2.jpg'
   ]
 })
 

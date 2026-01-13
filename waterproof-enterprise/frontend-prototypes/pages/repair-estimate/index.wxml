@@ -1,0 +1,72 @@
+<!-- pages/repair-estimate/index.wxml - 一键报修页面 -->
+<view class="repair-estimate-page">
+  <!-- 页面标题 -->
+  <view class="page-header">
+    <view class="header-left" bindtap="goBack">
+      <image src="/images/back.png" class="back-icon" mode="aspectFit"></image>
+    </view>
+    <view class="header-title">一键报修</view>
+    <view class="header-right"></view>
+  </view>
+
+  <!-- 表单容器 -->
+  <view class="form-container">
+    <!-- 服务类型选择 -->
+    <view class="form-item">
+      <view class="form-label">服务类型</view>
+      <view class="service-type-list">
+        <view class="service-type-item {{selectedServiceType === 'repair' ? 'active' : ''}}" bindtap="selectServiceType" data-type="repair">
+          <view class="service-type-icon">💧</view>
+          <view class="service-type-name">漏水维修</view>
+        </view>
+        <view class="service-type-item {{selectedServiceType === 'new' ? 'active' : ''}}" bindtap="selectServiceType" data-type="new">
+          <view class="service-type-icon">🏠</view>
+          <view class="service-type-name">新房防水</view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 预约时间 -->
+    <view class="form-item">
+      <view class="form-label required">预约时间</view>
+      <picker bindchange="bindTimeChange" value="{{timeIndex}}" range="{{timeArray}}">
+        <view class="picker">
+          {{timeArray[timeIndex]}}
+        </view>
+      </picker>
+    </view>
+
+    <!-- 联系人 -->
+    <view class="form-item">
+      <view class="form-label required">联系人</view>
+      <input type="text" placeholder="请输入联系人姓名" value="{{contactName}}" bindinput="bindContactNameInput" class="form-input" />
+    </view>
+
+    <!-- 联系电话 -->
+    <view class="form-item">
+      <view class="form-label required">联系电话</view>
+      <input type="number" placeholder="请输入联系电话" value="{{phoneNumber}}" bindinput="bindPhoneNumberInput" class="form-input" />
+    </view>
+
+    <!-- 房屋地址 -->
+    <view class="form-item">
+      <view class="form-label required">房屋地址</view>
+      <input type="text" placeholder="请输入房屋地址" value="{{houseAddress}}" bindinput="bindHouseAddressInput" class="form-input" />
+    </view>
+
+    <!-- 备注 -->
+    <view class="form-item">
+      <view class="form-label">备注</view>
+      <input type="text" placeholder="请输入备注信息（选填）" value="{{remark}}" bindinput="bindRemarkInput" class="form-input" />
+    </view>
+
+    <!-- 提交按钮 -->
+    <button class="submit-btn" bindtap="submitForm" type="primary">提交预约</button>
+  </view>
+
+  <!-- 联系我们信息 -->
+  <view class="contact-info">
+    <view class="contact-title">如何联系我们</view>
+    <view class="contact-content">提交成功后，项目经理将尽快与您联系，请保持手机畅通</view>
+  </view>
+</view>

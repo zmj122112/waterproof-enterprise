@@ -1,0 +1,49 @@
+{
+  "pages": [
+    "index",
+    "pages/repair-estimate/index",
+    "pages/order-list/index",
+    "pages/order-detail/index",
+    "pages/user-center/index",
+    "pages/product-list/index",
+    "pages/product-detail/index",
+    "pages/master-list/index",
+    "pages/master-detail/index",
+    "pages/trust-detail/index",
+    "pages/knowledge-base/index",
+    "pages/feedback/index"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#CC0010",
+    "navigationBarTitleText": "月星防水",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "color": "#9CA3AF",
+    "selectedColor": "#E60012",
+    "backgroundColor": "#FFFFFF",
+    "list": [
+      {
+        "pagePath": "index",
+        "text": "首页",
+        "iconPath": "/images/home.png",
+        "selectedIconPath": "/images/home-active.png"
+      },
+      {
+        "pagePath": "pages/repair-estimate/index",
+        "text": "一键报修",
+        "iconPath": "/images/repair.png",
+        "selectedIconPath": "/images/repair-active.png"
+      },
+      {
+        "pagePath": "pages/user-center/index",
+        "text": "我的",
+        "iconPath": "/images/user.png",
+        "selectedIconPath": "/images/user-active.png"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

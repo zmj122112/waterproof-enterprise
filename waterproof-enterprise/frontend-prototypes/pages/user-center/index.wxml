@@ -1,0 +1,73 @@
+<!-- pages/user-center/index.wxml - 个人中心页面 -->
+<view class="user-center-page">
+  <!-- 页面标题 -->
+  <view class="page-header">
+    <view class="header-left"></view>
+    <view class="header-title">我的</view>
+    <view class="header-right"></view>
+  </view>
+
+  <!-- 用户信息区域 -->
+  <view class="user-info-section">
+    <view class="user-info">
+      <image src="/images/avatar.png" class="avatar" mode="aspectFit"></image>
+      <view class="user-details">
+        <view class="user-name">未登录</view>
+        <view class="user-phone">点击登录</view>
+      </view>
+      <view class="login-btn" bindtap="login">登录/注册</view>
+    </view>
+  </view>
+
+  <!-- 订单状态 -->
+  <view class="order-stats-section">
+    <view class="section-title">我的订单</view>
+    <view class="order-stats-list">
+      <view class="order-stat-item" bindtap="goToOrderList" data-type="pending-visit">
+        <view class="order-stat-icon">⏰</view>
+        <view class="order-stat-name">待上门</view>
+      </view>
+      <view class="order-stat-item" bindtap="goToOrderList" data-type="in-progress">
+        <view class="order-stat-icon">🛠️</view>
+        <view class="order-stat-name">服务中</view>
+      </view>
+      <view class="order-stat-item" bindtap="goToOrderList" data-type="pending-inspection">
+        <view class="order-stat-icon">📝</view>
+        <view class="order-stat-name">待验收</view>
+      </view>
+      <view class="order-stat-item" bindtap="goToOrderList" data-type="completed">
+        <view class="order-stat-icon">✅</view>
+        <view class="order-stat-name">已完成</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 功能菜单 -->
+  <view class="function-menu-section">
+    <view class="menu-group">
+      <view class="menu-item" bindtap="goToAddress">
+        <view class="menu-icon">📍</view>
+        <view class="menu-name">地址管理</view>
+        <image src="/images/arrow-right.png" class="menu-arrow" mode="aspectFit"></image>
+      </view>
+      <view class="menu-item" bindtap="goToCoupon">
+        <view class="menu-icon">🎟️</view>
+        <view class="menu-name">优惠券中心</view>
+        <image src="/images/arrow-right.png" class="menu-arrow" mode="aspectFit"></image>
+      </view>
+    </view>
+
+    <view class="menu-group">
+      <view class="menu-item" bindtap="goToInvoice">
+        <view class="menu-icon">📄</view>
+        <view class="menu-name">发票中心</view>
+        <image src="/images/arrow-right.png" class="menu-arrow" mode="aspectFit"></image>
+      </view>
+      <view class="menu-item" bindtap="goToSettings">
+        <view class="menu-icon">⚙️</view>
+        <view class="menu-name">设置</view>
+        <image src="/images/arrow-right.png" class="menu-arrow" mode="aspectFit"></image>
+      </view>
+    </view>
+  </view>
+</view>

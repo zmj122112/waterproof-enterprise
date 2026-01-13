@@ -1,0 +1,95 @@
+<!-- index.wxml - 微信小程序首页 -->
+<view class="page-container">
+  <!-- 头部区域 -->
+  <view class="header-section">
+    <view class="header-content">
+      <view class="top-bar">
+        <view class="brand-info">
+          <image src="/logo.png" class="logo-img" mode="aspectFit"></image>
+          <view class="brand-text">
+            <view class="brand-name">月星防水</view>
+            <view class="brand-slogan">Since 1947</view>
+          </view>
+        </view>
+        <view class="user-icon" bindtap="goToUserCenter">
+          <image src="/images/user.png" class="user-icon-img" mode="aspectFit"></image>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 轮播图 -->
+  <view class="banner-container">
+    <swiper class="carousel" indicator-dots="true" autoplay="true" interval="3000" duration="500" circular="true" indicator-color="rgba(255,255,255,0.5)" indicator-active-color="#ffffff">
+      <swiper-item wx:for="{{carouselItems}}" wx:key="id" bindtap="goToLink" data-link="{{item.link}}">
+        <image src="{{item.image}}" class="carousel-image" mode="aspectFill"></image>
+        <view class="carousel-text">
+          <view class="carousel-title">{{item.title}}</view>
+          <view class="carousel-subtitle">{{item.subtitle}}</view>
+        </view>
+      </swiper-item>
+    </swiper>
+  </view>
+
+  <!-- 服务入口 -->
+  <view class="nav-capsule">
+    <view class="nav-item" bindtap="goToRepairEstimate">
+      <view class="nav-icon">💧</view>
+      <view class="nav-title text-red">漏水维修</view>
+      <view class="nav-desc">上门检测/快速止漏</view>
+    </view>
+    <view class="divider"></view>
+    <view class="nav-item" bindtap="goToRepairEstimate">
+      <view class="nav-icon">🏠</view>
+      <view class="nav-title text-gold">新房防水</view>
+      <view class="nav-desc">全屋防水/十年质保</view>
+    </view>
+  </view>
+
+  <!-- 核心服务 -->
+  <view class="section-card">
+    <view class="section-title">核心服务</view>
+    <view class="service-grid">
+      <view class="service-item" wx:for="{{coreServices}}" wx:key="id" bindtap="goToRepairEstimate">
+        <view class="service-icon-bg">{{item.icon}}</view>
+        <view class="service-name">{{item.title}}</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 找师傅和找产品入口 -->
+  <view class="entry-grid">
+    <view class="entry-item" bindtap="goToMasterList">
+      <view class="entry-header">
+        <view class="entry-title">找师傅</view>
+        <view class="entry-icon">👷</view>
+      </view>
+      <view class="entry-desc">金牌工长，经验丰富</view>
+    </view>
+    <view class="entry-item" bindtap="goToProductList">
+      <view class="entry-header">
+        <view class="entry-title">找产品</view>
+        <view class="entry-icon">🧱</view>
+      </view>
+      <view class="entry-desc">国标材料，环保安全</view>
+    </view>
+  </view>
+
+  <!-- 客户评价 -->
+  <view class="section-card" bindtap="goToCustomerReviewList">
+    <view class="section-title">客户评价</view>
+    <view class="review-list">
+      <view class="review-item" wx:for="{{customerReviews}}" wx:key="id">
+        <view class="review-header">
+          <view class="reviewer-name">{{item.name}}</view>
+          <view class="review-rating">
+            <text wx:for="{{[1,2,3,4,5]}}" wx:key="*this" class="star" wx:if="{{item.rating >= item}}">★</text>
+            <text wx:for="{{[1,2,3,4,5]}}" wx:key="*this" class="star empty" wx:else>☆</text>
+          </view>
+        </view>
+        <view class="review-content">{{item.content}}</view>
+      </view>
+    </view>
+    <view class="view-more">查看更多评价 →</view>
+  </view>
+</view>

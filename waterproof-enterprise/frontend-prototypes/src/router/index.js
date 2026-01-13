@@ -27,7 +27,7 @@ const router = createRouter({
         {
           path: 'appointment',
           name: 'c-mini-appointment',
-          component: () => import('../views/c-mini/Appointment.vue')
+          redirect: '/c-mini/repair-estimate'
         },
         {
           path: 'work-order-progress',
@@ -38,7 +38,10 @@ const router = createRouter({
         {          path: 'project-case-list',          name: 'c-mini-project-case-list',          component: () => import('../views/c-mini/ProjectCaseList.vue')        },
         {          path: 'project-case-detail/:id',          name: 'c-mini-project-case-detail',          component: () => import('../views/c-mini/ProjectCaseDetail.vue')        },
         {          path: 'customer-review-list',          name: 'c-mini-customer-review-list',          component: () => import('../views/c-mini/CustomerReviewList.vue')        },
-        {          path: 'customer-review-detail/:id',          name: 'c-mini-customer-review-detail',          component: () => import('../views/c-mini/CustomerReviewDetail.vue')        },        {          path: 'work-order-detail/:id',          name: 'c-mini-work-order-detail',          component: () => import('../views/c-mini/WorkOrderDetail.vue')        },        {          path: 'invoice-center',          name: 'c-mini-invoice-center',          component: () => import('../views/c-mini/InvoiceCenter.vue')        },        {          path: 'settings',          name: 'c-mini-settings',          component: () => import('../views/c-mini/Settings.vue')        },        {          path: 'exclusive-customer-service',          name: 'c-mini-exclusive-customer-service',          component: () => import('../views/c-mini/ExclusiveCustomerService.vue')        },        {          path: 'order-list',          name: 'c-mini-order-list',          component: () => import('../views/c-mini/OrderList.vue')        },        {          path: 'order-detail/:id',          name: 'c-mini-order-detail',          component: () => import('../views/c-mini/OrderDetail.vue')        }
+        {          path: 'customer-review-detail/:id',          name: 'c-mini-customer-review-detail',          component: () => import('../views/c-mini/CustomerReviewDetail.vue')        },        {          path: 'work-order-detail/:id',          name: 'c-mini-work-order-detail',          component: () => import('../views/c-mini/WorkOrderDetail.vue')        },        {          path: 'invoice-center',          name: 'c-mini-invoice-center',          component: () => import('../views/c-mini/InvoiceCenter.vue')        },        {          path: 'settings',          name: 'c-mini-settings',          component: () => import('../views/c-mini/Settings.vue')        },        {          path: 'exclusive-customer-service',          name: 'c-mini-exclusive-customer-service',          component: () => import('../views/c-mini/ExclusiveCustomerService.vue')        },        {          path: 'order-list',          name: 'c-mini-order-list',          component: () => import('../views/c-mini/OrderList.vue')        },        {          path: 'order-detail/:id',          name: 'c-mini-order-detail',          component: () => import('../views/c-mini/OrderDetail.vue')        },        {          path: 'trust/:type',          name: 'c-mini-trust-detail',          component: () => import('../views/c-mini/TrustDetail.vue')
+        },
+        {          path: 'feedback',          name: 'c-mini-feedback',          component: () => import('../views/c-mini/Feedback.vue')
+        }
       ]
     },
     // B端门户

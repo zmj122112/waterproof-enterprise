@@ -44,7 +44,7 @@ onMounted(() => {
 <template>
   <div class="product-detail-page" style="min-height: 100vh; background-color: #f5f7fa; padding-bottom: 80px;">
     <!-- 页面标题栏 - 包含返回按钮和分享图标 -->
-    <div style="background-color: #E60012; padding: 20px 20px 40px; text-align: center; position: relative; z-index: 30; border-bottom-left-radius: 32px; border-bottom-right-radius: 32px;">
+    <div style="background-color: #CC0010; padding: 20px 20px 40px; text-align: center; position: relative; z-index: 30; border-bottom-left-radius: 32px; border-bottom-right-radius: 32px;">
       <!-- 返回按钮 -->
       <a href="/c-mini/product-list" style="position: absolute; left: 10px; top: 10px; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; color: white; font-size: 18px; cursor: pointer; z-index: 99999; background: rgba(255,255,255,0.1); border-radius: 50%; text-decoration: none;">
         <el-icon><ArrowLeft /></el-icon>

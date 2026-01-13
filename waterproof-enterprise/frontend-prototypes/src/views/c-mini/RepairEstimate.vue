@@ -1,343 +1,137 @@
 <script setup>
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
-import { Plus, ZoomIn, Delete, Check, CircleCheck, User, ChatDotRound, Search, House, List, Calendar, Tools } from '@element-plus/icons-vue'
 
-// 报修类型选项
-const repairTypeOptions = [
-  { label: '卫生间漏水', value: '卫生间漏水' },
-  { label: '厨房漏水', value: '厨房漏水' },
-  { label: '屋顶补漏', value: '屋顶补漏' },
-  { label: '阳台漏水', value: '阳台漏水' },
-  { label: '外墙防水', value: '外墙防水' },
-  { label: '其他修缮', value: '其他修缮' }
-]
+const router = useRouter()
 
 // 表单数据
 const formData = ref({
-  repairType: '',
-  location: '',
-  description: '',
-  contact: '',
-  phone: ''
+  appointmentTime: '',
+  contactName: '',
+  phoneNumber: '',
+  houseAddress: '',
+  remark: ''
 })
-
-// 上传的图片列表
-const imageList = ref([])
-
-// 上传前的钩子函数
-const beforeUpload = (file) => {
-  const isImage = file.type.startsWith('image/')
-  if (!isImage) {
-    ElMessage.error('只能上传图片文件！')
-    return false
-  }
-  const isLt2M = file.size / 1024 / 1024 < 2
-  if (!isLt2M) {
-    ElMessage.error('图片大小不能超过 2MB！')
-    return false
-  }
-  return true
-}
-
-// 处理图片上传成功
-const handleSuccess = (response, file, fileList) => {
-  imageList.value = fileList
-  ElMessage.success('图片上传成功')
-}
-
-// 处理图片预览
-const handlePictureCardPreview = (file) => {
-  // 这里可以实现图片预览功能
-  console.log('预览图片:', file)
-}
-
-// 处理图片移除
-const handleRemove = (file, fileList) => {
-  imageList.value = fileList
-}
 
 // 提交表单
 const submitForm = () => {
+  // 表单验证
+  if (!formData.value.appointmentTime) {
+    ElMessage.error('请选择预约时间')
+    return
+  }
+  if (!formData.value.contactName) {
+    ElMessage.error('请输入联系人姓名')
+    return
+  }
+  if (!formData.value.phoneNumber) {
+    ElMessage.error('请输入联系电话')
+    return
+  }
+  if (!formData.value.houseAddress) {
+    ElMessage.error('请输入房屋地址')
+    return
+  }
+  
+  // 提交成功
   ElMessage.success('预约信息提交成功，项目经理将尽快与您联系！')
   console.log('提交表单:', formData.value)
-  console.log('上传图片:', imageList.value)
+  
+  // 清空表单
+  formData.value = {
+    appointmentTime: '',
+    contactName: '',
+    phoneNumber: '',
+    houseAddress: '',
+    remark: ''
+  }
 }
 </script>
 
 <template>
-  <div class="repair-estimate-page" style="min-height: 100vh; background-color: #f5f7fa; padding-bottom: 100px;">
-    <!-- 页面标题 -->
-    <div style="background-color: #CC0010; border-bottom-left-radius: 32px; border-bottom-right-radius: 32px; padding: 40px 20px 20px; text-align: center;">
-      <div style="color: white; font-size: 20px; font-weight: 700; margin: 0;">预约报修</div>
+  <div class="repair-estimate-page" style="min-height: 100vh; background-color: #f5f7fa;">
+    <!-- 顶部导航 -->
+    <div class="top-nav" style="background-color: #CC0010; padding: 16px 20px; display: flex; align-items: center; color: white; position: sticky; top: 0; z-index: 100;">
+      <div class="back-button" style="cursor: pointer; margin-right: 16px;" @click="router.back()">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 11H7.83L13.42 5.41L12 4L4 12L12 20L13.41 18.59L7.83 13H20V11Z" fill="white"/>
+        </svg>
+      </div>
+      <div class="page-title" style="font-size: 18px; font-weight: bold; flex: 1; text-align: center; margin-right: 40px; color: white;">预约上门</div>
     </div>
 
-    <!-- 报修表单 -->
-    <div style="background: white; margin: 20px 16px 16px; border-radius: 16px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.02);">
-      <el-form :model="formData" label-width="100px">
-          <el-form-item label="报修类型" required>
-            <el-select v-model="formData.repairType" placeholder="请选择报修类型" style="width: 100%">
-              <el-option
-                v-for="option in repairTypeOptions"
-                :key="option.value"
-                :label="option.label"
-                :value="option.value"
-              />
-            </el-select>
-          </el-form-item>
-          <el-form-item label="房屋地址" required>
-            <el-input v-model="formData.location" placeholder="请输入房屋地址" />
-          </el-form-item>
-          <el-form-item label="问题描述" required>
-            <el-input
-              v-model="formData.description"
-              type="textarea"
-              :rows="4"
-              placeholder="请详细描述漏水情况"
-            />
-          </el-form-item>
-          <el-form-item label="漏水照片">
-            <el-upload
-              :action="'#'"
-              list-type="picture-card"
-              :file-list="imageList"
-              :before-upload="beforeUpload"
-              :on-success="handleSuccess"
-              :on-remove="handleRemove"
-            >
-              <el-icon class="el-icon--plus"><Plus /></el-icon>
-              <template #file="{ file }">
-                <div>
-                  <img :src="file.url" alt="" class="el-upload-list__item-thumbnail" />
-                  <span class="el-upload-list__item-actions">
-                    <span
-                      class="el-upload-list__item-preview"
-                      @click="handlePictureCardPreview(file)"
-                    >
-                      <el-icon><ZoomIn /></el-icon>
-                    </span>
-                    <span
-                      class="el-upload-list__item-delete"
-                      @click="handleRemove(file, imageList)"
-                    >
-                      <el-icon><Delete /></el-icon>
-                    </span>
-                  </span>
-                </div>
-              </template>
-            </el-upload>
-            <div style="margin-top: 8px; font-size: 12px; color: #999;">建议上传1-3张清晰的漏水照片，便于我们快速了解情况</div>
-          </el-form-item>
-          <el-form-item label="联系人" required>
-            <el-input v-model="formData.contact" placeholder="请输入联系人姓名" />
-          </el-form-item>
-          <el-form-item label="联系电话" required>
-            <el-input v-model="formData.phone" placeholder="请输入联系电话" />
-          </el-form-item>
-          <el-form-item>
-            <el-button type="primary" size="large" @click="submitForm" style="width: 100%; background-color: #E60012; border-color: #E60012;" round>
-            <el-icon><Check /></el-icon>
-            提交预约，等待沟通
-          </el-button>
-          </el-form-item>
-        </el-form>
+    <!-- 表单容器 -->
+    <div class="form-container" style="background: white; margin: 20px 16px; border-radius: 12px; padding: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+      <!-- 预约时间 -->
+      <div style="margin-bottom: 20px;">
+        <label style="display: block; margin-bottom: 8px; color: #333; font-size: 14px; font-weight: medium;">
+          <span style="color: #E60012;">*</span> 预约时间
+        </label>
+        <select v-model="formData.appointmentTime" style="width: 100%; padding: 12px 16px; border: 1px solid #E5E7EB; border-radius: 8px; font-size: 14px; background: white;">
+          <option value="">请选择预约时间</option>
+          <option value="today">今天</option>
+          <option value="tomorrow">明天</option>
+          <option value="day_after_tomorrow">后天</option>
+          <option value="custom">自定义时间</option>
+        </select>
+      </div>
+
+      <!-- 联系人 -->
+      <div style="margin-bottom: 20px;">
+        <label style="display: block; margin-bottom: 8px; color: #333; font-size: 14px; font-weight: medium;">
+          <span style="color: #E60012;">*</span> 联系人
+        </label>
+        <input v-model="formData.contactName" type="text" placeholder="请输入联系人姓名" style="width: 100%; padding: 12px 16px; border: 1px solid #E5E7EB; border-radius: 8px; font-size: 14px;">
+      </div>
+
+      <!-- 联系电话 -->
+      <div style="margin-bottom: 20px;">
+        <label style="display: block; margin-bottom: 8px; color: #333; font-size: 14px; font-weight: medium;">
+          <span style="color: #E60012;">*</span> 联系电话
+        </label>
+        <input v-model="formData.phoneNumber" type="tel" placeholder="请输入联系电话" style="width: 100%; padding: 12px 16px; border: 1px solid #E5E7EB; border-radius: 8px; font-size: 14px;">
+      </div>
+
+      <!-- 房屋地址 -->
+      <div style="margin-bottom: 20px;">
+        <label style="display: block; margin-bottom: 8px; color: #333; font-size: 14px; font-weight: medium;">
+          <span style="color: #E60012;">*</span> 房屋地址
+        </label>
+        <input v-model="formData.houseAddress" type="text" placeholder="请输入房屋地址" style="width: 100%; padding: 12px 16px; border: 1px solid #E5E7EB; border-radius: 8px; font-size: 14px;">
+      </div>
+
+      <!-- 备注 -->
+      <div style="margin-bottom: 24px;">
+        <label style="display: block; margin-bottom: 8px; color: #333; font-size: 14px; font-weight: medium;">备注</label>
+        <input v-model="formData.remark" type="text" placeholder="请输入备注信息 (选填)" style="width: 100%; padding: 12px 16px; border: 1px solid #E5E7EB; border-radius: 8px; font-size: 14px;">
+      </div>
+
+      <!-- 提交按钮 -->
+      <button @click="submitForm" style="width: 100%; background-color: #E60012; color: white; border: none; border-radius: 8px; padding: 16px; font-size: 16px; font-weight: bold; cursor: pointer; transition: all 0.3s ease;">
+        提交预约
+      </button>
     </div>
 
-    <!-- 企业微信联系卡片 -->
-    <div style="background: #FFF0F0; border: 1px solid #FEE2E2; margin: 0 16px 16px; border-radius: 16px; padding: 20px;">
-        <div style="display: flex; flex-direction: column;">
-          <h3 style="color: #111827; font-weight: 700; margin-bottom: 12px;">如何联系我们</h3>
-          <p style="color: #6b7280; line-height: 1.6; margin-bottom: 8px;">提交成功后，项目经理将通过企业微信与您联系，请保持手机畅通</p>
-          <p style="color: #6b7280; line-height: 1.6; margin-bottom: 12px;">您也可以直接扫码添加我们的企业微信，更快获得服务</p>
-          <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px;">
-            <div style="display: flex; align-items: center; gap: 8px; color: #6b7280;">
-              <el-icon style="color: #10b981;"><CircleCheck /></el-icon>
-              <span>✔ 企业认证，安全可靠</span>
-            </div>
-            <div style="display: flex; align-items: center; gap: 8px; color: #6b7280;">
-              <el-icon style="color: #E60012;"><User /></el-icon>
-              <span>💼 专属项目经理，一对一服务</span>
-            </div>
-            <div style="display: flex; align-items: center; gap: 8px; color: #6b7280;">
-              <el-icon style="color: #3b82f6;"><ChatDotRound /></el-icon>
-              <span>📝 沟通记录可追溯</span>
-            </div>
-          </div>
-          <div style="display: flex; justify-content: center;">
-            <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
-              <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=MoonStarCS" alt="企业微信二维码" style="border: 2px solid white; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); border-radius: 8px; width: 120px; height: 120px;" />
-              <p style="color: #111827; font-weight: 500; text-align: center; margin: 0; font-size: 14px;">扫码加客服</p>
-            </div>
-          </div>
-        </div>
+    <!-- 联系我们信息 -->
+    <div class="contact-info" style="background: #FFF5F5; margin: 0 16px 20px; border-radius: 12px; padding: 20px; border: 1px solid #FEE2E2;">
+      <h3 style="color: #111827; font-weight: 700; margin-bottom: 12px; font-size: 16px;">如何联系我们</h3>
+      <p style="color: #6b7280; line-height: 1.6; margin-bottom: 12px; font-size: 14px;">提交成功后，项目经理将通过企业微信与您联系，请保持手机畅通</p>
+      <p style="color: #6b7280; line-height: 1.6; margin-bottom: 16px; font-size: 14px;">您也可以直接扫码添加我们的企业微信，更快获得服务</p>
+      <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3 12.5L6.75 14.75L13 9.5L8 8.25L3 12.5Z" fill="#10b981"/>
+        </svg>
+        <span style="color: #6b7280; font-size: 14px;">企业认证，安全可靠</span>
+      </div>
     </div>
   </div>
 </template>
 
 <style scoped>
 .repair-estimate-page {
-  background-color: $bg-secondary;
+  background-color: #f5f7fa;
   min-height: 100vh;
   padding-bottom: 80px; /* 为底部导航栏留出空间 */
-}
-
-/* 页面标题 */
-.home-header {
-  position: sticky;
-  top: 0;
-  z-index: 10;
-}
-
-.header-top {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 16px;
-}
-
-.page-title {
-  font-size: 20px;
-  font-weight: 700;
-  color: white;
-  margin: 0;
-  text-align: center;
-}
-
-/* 表单区域 */
-.form-section {
-  margin-bottom: 16px; /* mb-4 */
-}
-
-/* 上传提示 */
-.upload-tip {
-  margin-top: $spacing-xs;
-  font-size: $font-size-xs;
-  color: $text-tertiary;
-}
-
-/* 企业微信联系卡片 */
-.wechat-section {
-  margin-bottom: 16px; /* mb-4 */
-}
-
-/* 通用卡片样式 */
-.card-section {
-  background-color: white;
-  border-radius: 12px; /* rounded-xl */
-  padding: 16px; /* p-4 */
-  margin: 0 16px 16px; /* mx-4 mb-4 */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-}
-
-.wechat-title {
-  padding-bottom: $spacing-md;
-  border-bottom: 1px solid $border-color;
-  margin-bottom: $spacing-md;
-}
-
-.wechat-title h3 {
-  font-size: $font-size-md;
-  font-weight: $font-weight-bold;
-  color: $text-primary;
-  margin: 0;
-}
-
-.wechat-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: $spacing-lg;
-  margin-bottom: $spacing-md;
-}
-
-.wechat-info {
-  max-width: 100%;
-}
-
-.wechat-info p {
-  margin: 0 0 $spacing-sm;
-  color: $text-secondary;
-  line-height: 1.5;
-}
-
-.wechat-tip {
-  font-size: $font-size-sm;
-  font-weight: $font-weight-medium;
-  color: $primary-color;
-}
-
-.wechat-qrcode {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: $spacing-sm;
-}
-
-.qrcode-img {
-  width: 160px;
-  height: 160px;
-  border-radius: 12px;
-  border: 2px solid $border-color;
-  padding: $spacing-sm;
-  background-color: $bg-primary;
-  object-fit: cover;
-}
-
-.qrcode-text {
-  font-size: $font-size-sm;
-  font-weight: $font-weight-medium;
-  color: $text-primary;
-  margin: 0;
-}
-
-.wechat-features {
-  display: flex;
-  justify-content: space-around;
-  padding-top: $spacing-md;
-  border-top: 1px solid $border-color;
-}
-
-.feature-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: $spacing-xs;
-  max-width: 100px;
-}
-
-.feature-icon {
-  font-size: 24px;
-  color: $primary-color;
-  margin-bottom: $spacing-xs;
-}
-
-.feature-item span {
-  font-size: $font-size-xs;
-  color: $text-secondary;
-  text-align: center;
-  line-height: 1.4;
-}
-
-/* 表单样式 */
-.el-form {
-  width: 100%;
-}
-
-.el-form-item {
-  margin-bottom: $spacing-md;
-}
-
-.el-form-item__label {
-  font-weight: $font-weight-medium;
-  color: $text-primary;
-}
-
-.el-input__wrapper, .el-select__wrapper {
-  border-radius: 8px;
-}
-
-.el-button {
-  font-weight: $font-weight-medium;
 }
 </style>

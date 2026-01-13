@@ -8,10 +8,10 @@ const route = useRoute()
 const router = useRouter()
 const orderId = ref(route.params.id || 'WD20231015001')
 
-// 订单详情数据
+// 订单详情数据 - 使用统一状态
 const orderDetail = ref({
   id: orderId.value,
-  status: '待分配',
+  status: '待上门',
   type: '上门检测',
   createTime: '2023-10-15',
   amount: '¥200',
@@ -20,16 +20,17 @@ const orderDetail = ref({
   customerPhone: '13800138000',
   address: '上海市浦东新区张杨路1000号',
   description: '屋顶漏水，需要上门检测和维修',
-  assignedMaster: '',
-  masterPhone: '',
-  scheduleTime: '',
+  assignedMaster: '李师傅',
+  masterPhone: '13900139000',
+  scheduleTime: '2023-10-16 14:00',
   progress: [
     { step: 1, title: '提交订单', status: 'completed', time: '2023-10-15 10:30' },
     { step: 2, title: '订单审核', status: 'completed', time: '2023-10-15 10:35' },
-    { step: 3, title: '师傅分配', status: 'pending', time: '' },
-    { step: 4, title: '上门服务', status: 'pending', time: '' },
-    { step: 5, title: '服务完成', status: 'pending', time: '' },
-    { step: 6, title: '评价完成', status: 'pending', time: '' }
+    { step: 3, title: '师傅分配', status: 'completed', time: '2023-10-15 11:00' },
+    { step: 4, title: '待上门', status: 'pending', time: '' },
+    { step: 5, title: '服务中', status: 'pending', time: '' },
+    { step: 6, title: '待验收', status: 'pending', time: '' },
+    { step: 7, title: '已完成', status: 'pending', time: '' }
   ]
 })
 
@@ -46,7 +47,7 @@ onMounted(() => {
 <template>
   <div class="order-detail-page" style="background-color: #f3f4f6; min-height: 100vh;">
     <!-- 红色底部舞台 Header -->
-    <div style="background-color: #E60012; border-bottom-left-radius: 32px; border-bottom-right-radius: 32px; padding: 20px 20px 30px; text-align: center; position: relative;">
+    <div style="background-color: #CC0010; border-bottom-left-radius: 32px; border-bottom-right-radius: 32px; padding: 20px 20px 30px; text-align: center; position: relative;">
       <a href="/c-mini/order-list" style="position: absolute; left: 10px; top: 10px; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px; cursor: pointer; z-index: 99999; background: rgba(255,255,255,0.1); border-radius: 50%; text-decoration: none;">
         <el-icon><ArrowLeft /></el-icon>
       </a>
@@ -142,7 +143,7 @@ onMounted(() => {
           联系客服
         </el-button>
         <el-button 
-          v-if="orderDetail.status === '待分配'" 
+          v-if="orderDetail.status === '待上门'" 
           type="primary" 
           round 
           style="flex: 1;"

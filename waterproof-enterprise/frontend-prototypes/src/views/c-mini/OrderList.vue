@@ -10,20 +10,20 @@ const router = useRouter()
 // 获取订单类型
 const orderType = ref(route.query.type || 'all')
 
-// 订单类型映射
+// 订单类型映射 - 统一分类
 const orderTypeMap = {
   'all': '全部订单',
-  'pending-payment': '待付款',
   'pending-visit': '待上门',
-  'in-progress': '施工中',
-  'pending-review': '待评价'
+  'in-progress': '服务中',
+  'pending-inspection': '待验收',
+  'completed': '已完成'
 }
 
-// 订单数据
+// 订单数据 - 使用统一状态
 const orders = ref([
   {
     id: 'WD20231015001',
-    status: '待分配',
+    status: '待上门',
     type: '上门检测',
     createTime: '2023-10-15',
     amount: '¥200',
@@ -31,7 +31,7 @@ const orders = ref([
   },
   {
     id: 'WD20231010001',
-    status: '施工中',
+    status: '服务中',
     type: '直接施工',
     createTime: '2023-10-10',
     amount: '¥800',
@@ -65,7 +65,7 @@ onMounted(() => {
 <template>
   <div class="order-list-page" style="background-color: #f3f4f6; min-height: 100vh;">
     <!-- 红色底部舞台 Header -->
-    <div style="background-color: #E60012; border-bottom-left-radius: 32px; border-bottom-right-radius: 32px; padding: 20px 20px 30px; text-align: center; position: relative;">
+    <div style="background-color: #CC0010; border-bottom-left-radius: 32px; border-bottom-right-radius: 32px; padding: 20px 20px 30px; text-align: center; position: relative;">
       <a href="/c-mini/user-center" style="position: absolute; left: 10px; top: 10px; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px; cursor: pointer; z-index: 99999; background: rgba(255,255,255,0.1); border-radius: 50%; text-decoration: none;">
         <el-icon><ArrowLeft /></el-icon>
       </a>
@@ -85,8 +85,9 @@ onMounted(() => {
             <div style="font-size: 16px; font-weight: 600; color: #111827;">订单编号：{{ order.id }}</div>
           </div>
           <el-tag 
-            :type="order.status === '待分配' ? 'warning' : 
-                   order.status === '施工中' ? 'danger' : 
+            :type="order.status === '待上门' ? 'warning' : 
+                   order.status === '服务中' ? 'danger' : 
+                   order.status === '待验收' ? 'info' : 
                    order.status === '已完成' ? 'success' : 'info'"
           >
             {{ order.status }}
@@ -117,7 +118,7 @@ onMounted(() => {
             查看详情
           </el-button>
           <el-button 
-            v-if="order.status === '待分配'" 
+            v-if="order.status === '待上门'" 
             type="primary" 
             round 
             size="small"

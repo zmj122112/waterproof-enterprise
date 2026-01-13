@@ -1,7 +1,6 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { User, Setting, Document, Location, Ticket, Service } from '@element-plus/icons-vue'
 
 const router = useRouter()
 
@@ -12,61 +11,53 @@ const userInfo = ref({
   avatar: '/logo.png'
 })
 
-// 订单数据
+// 核心订单状态 - 统一分类
 const orderStats = [
-  { name: '待付款', count: 0, icon: Document },
-  { name: '待上门', count: 1, icon: Document },
-  { name: '施工中', count: 0, icon: Document },
-  { name: '待评价', count: 2, icon: Document }
+  { name: '待上门', icon: '⏰', type: 'pending-visit' },
+  { name: '服务中', icon: '🛠️', type: 'in-progress' },
+  { name: '待验收', icon: '📝', type: 'pending-inspection' },
+  { name: '已完成', icon: '✅', type: 'completed' }
 ]
 
-// 常用工具
+// 功能菜单 - 精简版
 const tools = [
-  { name: '我的工单', icon: Document, path: '/c-mini/work-order-progress' },
-  { name: '地址管理', icon: Location, path: '/c-mini/address-management' },
-  { name: '优惠券', icon: Ticket, path: '/c-mini/coupon-center' },
-  { name: '专属客服', icon: Service, path: '/c-mini/exclusive-customer-service' },
-  { name: '发票中心', icon: Document, path: '/c-mini/invoice-center' },
-  { name: '设置', icon: Setting, path: '/c-mini/settings' }
+  { name: '地址管理', icon: '📍', path: '/c-mini/address-management' },
+  { name: '联系客服', icon: '🎧', path: '/c-mini/exclusive-customer-service' },
+  { name: '问题反馈', icon: '📝', path: '/c-mini/feedback' },
+  { name: '设置', icon: '⚙️', path: '/c-mini/settings' }
 ]
 
 // 查看全部订单
 const viewAllOrders = () => {
-  router.push('/c-mini/work-order-progress')
+  router.push('/c-mini/order-list')
+}
+
+// 查看特定状态订单
+const viewOrdersByStatus = (type) => {
+  router.push(`/c-mini/order-list?type=${type}`)
 }
 
 // 退出登录
 const logout = () => {
-  // 这里可以添加退出登录逻辑
   console.log('退出登录')
 }
 </script>
 
 <template>
-  <div class="user-center-page" style="background-color: #f3f4f6; min-height: 100vh; position: relative;">
-    <!-- 红色底部舞台 Header -->
-    <div style="background-color: #CC0010; border-bottom-left-radius: 32px; border-bottom-right-radius: 32px; padding: 20px 20px 30px; text-align: center; position: relative; overflow: hidden;">
-      <!-- 用户信息 -->
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-        <div style="width: 24px;"></div> <!-- 占位 -->
-        <div style="color: white; font-size: 20px; font-weight: 700;">个人中心</div>
-        <div style="width: 24px;"></div> <!-- 占位 -->
-      </div>
-      
-      <div style="display: flex; align-items: center; gap: 12px; justify-content: center;">
-        <img :src="userInfo.avatar" alt="用户头像" style="width: 60px; height: 60px; border-radius: 50%; border: 2px solid white; background-color: white; object-fit: cover; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);">
-        <div style="display: flex; flex-direction: column; gap: 4px;">
-          <div style="font-size: 18px; font-weight: 700; color: white;">{{ userInfo.name }}</div>
-          <div style="font-size: 12px; background-color: rgba(255, 255, 255, 0.2); padding: 2px 10px; border-radius: 12px; color: white; display: inline-block;">70年品牌见证官</div>
-        </div>
+  <div class="user-center-page" style="background-color: #f3f4f6; min-height: 100vh;">
+    <!-- 头部区域 - 统一风格设计 -->
+    <div style="background-color: #CC0010; border-bottom-left-radius: 32px; border-bottom-right-radius: 32px; padding: 40px 20px 24px; display: flex; flex-direction: column; align-items: center; gap: 16px;">
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <img :src="userInfo.avatar" alt="用户头像" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover; border: 2px solid white; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);">
+        <div style="font-size: 18px; font-weight: 600; color: white;">{{ userInfo.name }}</div>
       </div>
     </div>
 
-    <!-- 订单状态栏 - 浮动白色卡片 -->
-    <div style="position: relative; z-index: 10; margin: -20px 20px 20px; background-color: white; border-radius: 16px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); padding: 16px;">
+    <!-- 核心订单区 - 头部下方第一个卡片 -->
+    <div style="margin: 16px 20px; background-color: white; border-radius: 12px; padding: 16px;">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
         <div style="font-size: 16px; font-weight: 600; color: #111827;">我的订单</div>
-        <div @click="viewAllOrders" style="font-size: 14px; color: #E60012; cursor: pointer; display: flex; align-items: center; gap: 4px;">
+        <div @click="viewAllOrders" style="font-size: 14px; color: #6b7280; cursor: pointer; display: flex; align-items: center; gap: 4px;">
           全部订单 <span style="font-size: 16px;">›</span>
         </div>
       </div>
@@ -74,62 +65,46 @@ const logout = () => {
         <div 
           v-for="stat in orderStats" 
           :key="stat.name" 
-          style="text-align: center; display: flex; flex-direction: column; align-items: center; cursor: pointer; transition: all 0.3s ease;"
-          @click="() => {
-            let type = '';
-            if (stat.name === '待付款') type = 'pending-payment';
-            if (stat.name === '待上门') type = 'pending-visit';
-            if (stat.name === '施工中') type = 'in-progress';
-            if (stat.name === '待评价') type = 'pending-review';
-            $router.push(`/c-mini/order-list?type=${type}`);
-          }"
-          @mouseenter="$event.target.style.transform = 'translateY(-2px)'"
-          @mouseleave="$event.target.style.transform = ''"
+          style="text-align: center; display: flex; flex-direction: column; align-items: center; cursor: pointer; padding: 8px 0; transition: all 0.3s ease;"
+          @click="viewOrdersByStatus(stat.type)"
+          @mouseenter="$event.target.style.backgroundColor = '#f9fafb'"
+          @mouseleave="$event.target.style.backgroundColor = 'transparent'"
         >
-          <div style="width: 48px; height: 48px; border-radius: 12px; background-color: #fef2f2; display: flex; align-items: center; justify-content: center; color: #E60012; margin-bottom: 8px; transition: all 0.3s ease;">
-            <component :is="stat.icon" size="24" />
-          </div>
-          <div style="font-size: 18px; font-weight: 700; color: #111827; margin-bottom: 4px;">{{ stat.count }}</div>
-          <div style="font-size: 14px; color: #6b7280;">{{ stat.name }}</div>
+          <div style="font-size: 24px; margin-bottom: 4px;">{{ stat.icon }}</div>
+          <div style="font-size: 12px; color: #6b7280;">{{ stat.name }}</div>
         </div>
       </div>
     </div>
 
-    <!-- 常用工具网格 - 浮动白色卡片 -->
-    <div style="background-color: white; border-radius: 16px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); padding: 24px; margin: 0 20px 20px;">
-      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;">
+    <!-- 功能菜单区 - 瘦身版 -->
+    <div style="margin: 0 20px 16px; background-color: white; border-radius: 12px; padding: 16px;">
+      <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;">
         <div 
           v-for="tool in tools" 
           :key="tool.name" 
-          style="display: flex; flex-direction: column; align-items: center; gap: 12px; cursor: pointer; transition: all 0.3s ease; padding: 16px 8px; border-radius: 12px; min-width: 80px;"
-          @click="$router.push(tool.path)"
-          @mouseenter="$event.target.style.backgroundColor = '#fef2f2'; $event.target.style.transform = 'translateY(-2px)'"
-          @mouseleave="$event.target.style.backgroundColor = ''; $event.target.style.transform = ''"
+          style="display: flex; align-items: center; gap: 12px; cursor: pointer; padding: 12px; border-radius: 8px; transition: all 0.3s ease;"
+          @click="router.push(tool.path)"
+          @mouseenter="$event.target.style.backgroundColor = '#f9fafb'"
+          @mouseleave="$event.target.style.backgroundColor = 'transparent'"
         >
-          <div style="width: 48px; height: 48px; border-radius: 12px; background-color: #fef2f2; display: flex; align-items: center; justify-content: center; color: #E60012; transition: all 0.3s ease;">
-            <component :is="tool.icon" size="24" />
-          </div>
+          <div style="font-size: 20px; width: 24px; text-align: center;">{{ tool.icon }}</div>
           <div style="font-size: 14px; color: #111827; font-weight: 500;">{{ tool.name }}</div>
+          <div style="margin-left: auto; font-size: 16px; color: #d1d5db;">›</div>
         </div>
       </div>
     </div>
 
-    <!-- 底部操作 -->
+    <!-- 底部操作 - 简化版 -->
     <div style="padding: 0 20px 24px;">
-      <el-button type="danger" size="large" round style="width: 100%; display: block;" @click="logout">
+      <button 
+        type="button" 
+        style="width: 100%; background-color: white; border: 1px solid #e5e7eb; border-radius: 8px; padding: 12px; font-size: 14px; color: #6b7280; cursor: pointer; transition: all 0.3s ease;"
+        @click="logout"
+        @mouseenter="$event.target.style.backgroundColor = '#f9fafb'"
+        @mouseleave="$event.target.style.backgroundColor = 'white'"
+      >
         退出登录
-      </el-button>
-    </div>
-
-    <!-- 品牌植入区 -->
-    <div style="text-align: center; padding: 24px 20px;">
-      <div style="display: flex; flex-direction: column; align-items: center; gap: 12px;">
-        <div style="width: 64px; height: 64px; border-radius: 50%; background-color: #f3f4f6; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #9ca3af; font-weight: 700; font-size: 18px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);">
-          <span>月星</span>
-          <span style="font-size: 12px; font-weight: 400; margin-top: 2px;">1947</span>
-        </div>
-        <div style="font-size: 14px; color: #9ca3af; font-weight: 500;">月星防水 · 70年的历练</div>
-      </div>
+      </button>
     </div>
   </div>
 </template>
